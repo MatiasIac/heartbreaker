@@ -4,12 +4,12 @@ function Waso() {
 	var x = 10;
 	var accumulator = 0;
 	var frame = 0;
-	var finalWidth = 33;
+	var finalWidth = 30;
 	var finalHeight = 62;
 	var animationDelay = 0.04;
 	
 	var sprite = new Image();
-	sprite.src = "graphics/waso.png";
+	sprite.src = "graphics/sprite_personaje.png";
 	
 	this.zOrder = 100;
 	
@@ -26,7 +26,7 @@ function Waso() {
 	}
 	
 	this.draw = function(context) {
-		context.drawImage(sprite, frame * 33, 0, 33, 62,
+		context.drawImage(sprite, frame * 30, 0, 30, 62,
 			x, g_baseline - sprite.height, finalWidth, finalHeight);
 	}
 	
