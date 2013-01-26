@@ -12,7 +12,6 @@ function BaseClass() {
 	this.visible = true;
 	
 	this.update = function(delta) {
-
 	}
 	
 	this.draw = function(context) {
