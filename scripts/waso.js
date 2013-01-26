@@ -6,6 +6,7 @@ function Waso() {
 	var frame = 0;
 	var finalWidth = 60;
 	var finalHeight = 70;
+	var animationDelay = 0.02;
 	
 	var sprite = new Image();
 	sprite.src = "graphics/santa.png";
@@ -15,21 +16,30 @@ function Waso() {
 	this.init = function() {
 		x = 10;
 		y = 10;
+		currentAction = walking;		
 	}
 	
 	this.visible = true;
 	
-	this.update = function(delta) {
+	this.update = function(delta) {				
 		accumulator += delta;
-		if (accumulator >= 0.02) {
-			accumulator = 0;
-			frame++;
-			if (frame > 15) { frame = 0; }
-		}
+		currentAction(delta);
 	}
 	
 	this.draw = function(context) {
 		context.drawImage(sprite, frame * 92, 0, 92, 114,
 			x, y, finalWidth, finalHeight);
 	}
+	
+	var currentAction = function(delta) {
+	};
+	
+	function walking(delta) {
+		if (accumulator >= animationDelay) {
+			accumulator = 0;
+			frame++;
+			if (frame > 15) { frame = 0; }
+		}
+	}
+	
 }
