@@ -1,8 +1,9 @@
 var g_baseline = 600;
+var game;
 
 function Game() {
 	this.run = function () {
-		var game = new MinFwkGame();
+		game = new MinFwkGame();
 		game.init("canvas");
 		
 		var waso = new Waso();

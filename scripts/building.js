@@ -1,11 +1,10 @@
 function Building(xParam) {
 	var self = this;
 	var x = xParam;
-	
+	var baseline;
 	
 	var buildingSprite = new Image();
 	buildingSprite.src = "graphics/edificio.png";
-	var baseline;
 	
 	buildingSprite.onload = function() {
 		baseline = g_baseline - buildingSprite.height;
@@ -17,6 +16,7 @@ function Building(xParam) {
 	function getPisoBase(x, y) {
 		return {coords: {x: x, y: y}, state: 0, ocupantes:[], animacion: drawEmptyFlat};
 	}
+	
 	var estructura = [];
 	//Estado 0, vacío
 	estructura.push([
@@ -36,14 +36,27 @@ function Building(xParam) {
 		coords: {x:70, y: 0}
 	}
 	
-	//var sprite = new Image();
-	//sprite.src = "...";
-
 	this.zOrder = 100;
 	
 	this.init = function() {
+		game.registerMouseClick(mouseClick);
+	}
 	
-	
+	function mouseClick(mx, my) {
+		for (var piso in estructura) {
+			for (var depto in estructura[piso]) {
+				var rectWindow = new Rectangle().startupRectangle(
+					estructura[piso][depto]["coords"].x + x,
+					estructura[piso][depto]["coords"].y + baseline, 55, 40);
+				
+				var rectClick = new Rectangle().startupRectangle(mx, my, 10, 10);
+				
+				if (rectClick.intersects(rectWindow)) {
+					alert("Piso: " + piso + ", Dpto: " + depto);
+					break;
+				}
+			}
+		}
 	}
 	
 	this.visible = true;
