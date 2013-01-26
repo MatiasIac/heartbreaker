@@ -1,5 +1,6 @@
 <script src="scripts/Rectangle.js"></script>
 <script src="scripts/tools.js"></script>
+<script src="scripts/waso.js"></script>
 <script src="scripts/main.js"></script>
 <body style="text-align:center; background-color:gray">
 	<canvas id="canvas" width="640" height="480"
@@ -11,6 +12,11 @@
 <script>
 	var game = new MinFwkGame();
 	game.init("canvas");
+	
+	var waso = new Waso();
+	
+	game.add(waso);
+
 	
 	/*game.registerMouseClick(MouseClick);
 	game.registerKeyPress(KeyPress);
