@@ -88,8 +88,10 @@ function Game() {
 				personaAsignada = wasosAsignables.splice(chosenPersonNumber, 1)[0];
 				if (personaAsignada.isHornerator) {
 					horneators.push(personaAsignada);
+					personaAsignada.side = 2;
 				} else {
 					personasAsignadas++;
+					personaAsignada.side = personasAsignadas;
 					chosen.owners.push(personaAsignada);
 					personaAsignada.depto = chosen;
 				}
@@ -119,8 +121,7 @@ function Game() {
 		if (timer < 0) {
 			timer = 0.5 + Math.random() * 1.0;
 			self.actOnSomeGuy();
-		}
-		
+		}		
 	}
 	
 	this.actOnSomeGuy = function() {
@@ -146,9 +147,27 @@ function Game() {
 				var ownerActual = chosenDepto.owners[1];
 				if (ownerActual.inside && ownerActual.insideTimeOut < new Date().getTime()) {
 					ownerActual.setAction(3);
-					chosenDepto.state = "esperandoUltimo";
+					chosenDepto.state = "bajaSegundo";
 				}
-				
+				break;
+			case "bajaSegundo":
+				chosenDepto.owners[0].setAction(0);
+				chosenDepto.state = "vuelveASubirPrimero";
+				break;
+			case "vuelveASubirPrimero":
+				var ownerActual = chosenDepto.owners[0];
+				if (ownerActual.inside) {
+					if (ownerActual.pataeLana) {
+						ownerActual.pataeLana.callCheater(ownerActual);
+						chosenDepto.state = "esperandoPataDeLana";
+					} else {
+						//llama a casa a la pareja
+						chosenDepto.owners[1].setAction(0);
+						chosenDepto.state = "esperandoPareja";
+					}
+				}
+				break;
+
 		}
 	}
 		
