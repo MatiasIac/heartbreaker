@@ -10,15 +10,14 @@ function createDepto(x, y) {
 		this.coords = {x: x, y: y};
 		this.state = 0;
 		this.ocupantes = [];
-		this.buildingX = 0;
 		
-		this.drawOccupiedFlat = function(context, depto) {
-			context.drawImage(busySprite, depto.coords.x + self.buildingX, 
+		this.drawOccupiedFlat = function(context, depto, buildingX) {
+			context.drawImage(busySprite, depto.coords.x + buildingX, 
 				g_baseline - depto.coords.y);
 		};
 		
-		this.drawEmptyFlat = function(context, depto) {
-			context.drawImage(emptySprite, depto.coords.x + self.buildingX, 
+		this.drawEmptyFlat = function(context, depto, buildingX) {
+			context.drawImage(emptySprite, depto.coords.x + buildingX, 
 				g_baseline - depto.coords.y);
 		};
 		
@@ -34,18 +33,18 @@ function createDepto(x, y) {
 }
 
 var s = [{ data: [[createDepto(20,50),createDepto(80,50)],
+				  [createDepto(20,120),createDepto(80,120)],
+				  [createDepto(20,200),createDepto(90,200)]]},
+		  {data: [[createDepto(20,50),createDepto(80,50)],
+				  [createDepto(20,120),createDepto(80,120)],
+				  [createDepto(20,200),createDepto(90,200)]]},
+	{data: [[createDepto(20,50),createDepto(80,50)],
 	[createDepto(20,120),createDepto(80,120)],
-	[createDepto(20,200),createDepto(90,200)]],
+	[createDepto(40,200),createDepto(90,200)]]
 	}];
 
-function getStructure(i, bx) {
+function getStructure(i) {
 	var data = s[i].data;
-	
-	for (var piso in data) {
-		for (var depto in data[piso]) {
-			data[piso][depto]["buildingX"] = bx;
-		}
-	}
 	
 	return data;
 }

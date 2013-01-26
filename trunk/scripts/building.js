@@ -34,9 +34,14 @@ function Building(xParam) {
 	
 	this.init = function() {
 		game.registerMouseClick(mouseClick);
-		elevator = new Elevator([{x: 10 + x, y: g_baseline - 50 },
-			{x: 10 + x, y: g_baseline - 120},
-			{x: 10 + x, y: g_baseline - 200}]);
+		
+		var elevatorElements = [];
+		
+		for (var i = 0; i < estructura.length; i++) {
+			elevatorElements.push({x: 10 + x, y: g_baseline - (50 * i) });
+		}
+		
+		elevator = new Elevator(elevatorElements);
 		game.add(elevator);
 		elevator.elevatorArrive = callbackElevator;
 	}
@@ -77,7 +82,7 @@ function Building(xParam) {
 		context.drawImage(buildingSprite, x, topLine);
 		for (var piso in estructura) {
 			for (var depto in estructura[piso]) {
-				estructura[piso][depto]["animacion"](context, estructura[piso][depto]);		
+				estructura[piso][depto]["animacion"](context, estructura[piso][depto], x);		
 			}
 		}
 	}
