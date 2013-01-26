@@ -25,11 +25,17 @@ function MinFwkGame() {
 
 	this.add = function (obj) {
 		objectToBeAdded.push(obj);
-	}
+	};
 		
 	this.remove = function (obj) {
 		objectToDeleted.push(obj);
-	}
+	};
+	
+	this.removeAll = function() {
+		for (var i = 0; i < gameObjects.length; i++) {
+			self.remove(gameObjects[i]);
+		}	
+	};
 
 	function processAll() {
 		//Added

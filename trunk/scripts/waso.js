@@ -1,16 +1,17 @@
 function Waso(characteristics) {
+	var factor = 1;
 	var self = this;
 
-	var x = characteristics.startingX;
+	var x = characteristics.startX;
 	var chars = characteristics;
 	
 	var accumulator = 0;
 	var frame = 0;
 	var animationDelay = 0.08;
 	
-	this.building = characteristics.myBuilding;
-	this.piso = characteristics.pisoIndex;
-	this.depto = characteristics.dptoIndex;
+	//this.building = characteristics.myBuilding;
+	//this.piso = characteristics.pisoIndex;
+	//this.depto = characteristics.dptoIndex;
 
 	var sprite;
 	var spriteL = new Image();
@@ -26,7 +27,7 @@ function Waso(characteristics) {
 	
 	this.init = function() {
 		sprite = spriteR;	
-		currentAction = goHome;
+		currentAction = wander;
 		//para testing; currentAction = waitingElevator;
 	}
 	
@@ -50,7 +51,6 @@ function Waso(characteristics) {
 	var currentAction = function(delta) {};
 	
 	function goHome(delta) {
-		var factor;
 		puertaX = self.building.getPuertaX();
 		
 		if (x < puertaX) {
@@ -59,13 +59,26 @@ function Waso(characteristics) {
 			factor = -1;
 		}
 		
-		x += 50.3 * factor * delta;
+		x += chars.walkSpeed * factor * delta;
 		walk(delta, factor);
 		var threshold = 10;
 		
 		if (Math.abs(x - puertaX) < threshold) {
 			currentAction = waitingElevator;
 		}		
+	}
+	
+	function wander(delta) {
+		//TODO: Hacer random o por parametro
+		
+		if (x < 0) {
+			factor = 1;
+		} else if (x > 600) {
+			factor = -1;
+		}
+		
+		x += chars.walkSpeed * factor * delta;
+		walk(delta, factor);
 	}
 	
 	function waitingElevator(delta) {
