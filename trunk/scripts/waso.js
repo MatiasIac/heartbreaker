@@ -8,10 +8,6 @@ function Waso(characteristics) {
 	var accumulator = 0;
 	var frame = 0;
 	var animationDelay = 0.08;
-	
-	//this.building = characteristics.myBuilding;
-	//this.piso = characteristics.pisoIndex;
-	//this.depto = characteristics.dptoIndex;
 
 	var sprite;
 	var spriteL = new Image();
@@ -32,22 +28,30 @@ function Waso(characteristics) {
 	}
 	
 	this.visible = true;
-	this.state = 0; // 0 - Nada / 1 - 
-	this.isHornerator = false; // no es coso
+	this.state = 0; 
+	this.isHornerator = false;
 	
 	this.update = function(delta) {				
 		accumulator += delta;
 		currentAction(delta);
 	}
 	
-	this.draw = function(context) {
+	this.draw = function(context, index) {
+		if (index !== undefined) {
+			//Estamos dentro de la casa
+			context.drawImage(sprite, frame * 35, 0, 35, 62,
+				self.depto.building.buildingXCoord + self.depto.coords.x, 
+				g_baseline - (self.depto.coords.y), 35, 62);
+			return;
+		}
+		
 		context.drawImage(sprite, frame * 35, 0, 35, 62,
 			x, g_baseline - sprite.height, 35, 62);
-		context.save();
+		/*context.save();
 			context.fillStyle = "rgb(0,0,0)";
-			context.fillText("id: " + chars.id, x + (35 / 2),
+			context.fillText("id: " + chars.id + " " + self.isHornerator, x + (35 / 2),
 				g_baseline - (sprite.height + 5));
-		context.restore();
+		context.restore();*/
 	}
 	
 	var currentAction = function(delta) {};
@@ -66,13 +70,18 @@ function Waso(characteristics) {
 		var threshold = 10;
 		
 		if (Math.abs(x - puertaX) < threshold) {
-			currentAction = waitingElevator;
+			currentAction = idleInHouse;
 		}		
 	}
 	
+	//Waso actions
+	function idleInHouse(delta) {
+		self.depto.addOcupante(self);
+		//self.visible = true;
+		currentAction = idle;
+	}
+	
 	function wander(delta) {
-		//TODO: Hacer random o por parametro
-		
 		if (x < 0) {
 			direction = 1;
 		} else if (x > 600) {
@@ -81,24 +90,6 @@ function Waso(characteristics) {
 		
 		x += chars.walkSpeed * direction * delta;
 		walk(delta, direction);
-	}
-	
-	function waitingElevator(delta) {
-		callElevator(0, goUpHomeCallback);
-	};
-	
-	function goUpHomeCallback(currentFloor) {
-		callElevator(self.depto.piso, enterHomeCallback);
-	}
-	
-	function enterHomeCallback(currentFloor) {
-		self.depto.addOcupante(self);
-	}
-	
-	function callElevator(floor, callback) {
-		self.visible = false;
-		self.depto.building.callElevator(floor, callback);  
-		currentAction = idle;
 	}
 		
 	function idle(delta) {
@@ -121,6 +112,7 @@ function Waso(characteristics) {
 			}
 		}
 	}
+	//END Waso actions
 	
 	this.setAction = function (action) {
 		switch (action) {
@@ -134,11 +126,7 @@ function Waso(characteristics) {
 				currentAction = idle;
 				break;
 		}
-		
-		//self.acceptMoreCommands = false;
 	}
 	
-	//this.acceptMoreCommands = true;
-	
-	this.zOrder = 100;
+	this.zOrder = 1;
 }

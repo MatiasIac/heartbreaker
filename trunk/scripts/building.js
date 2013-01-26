@@ -11,6 +11,8 @@ function Building(xParam) {
 		topLine = g_baseline - buildingSprite.height;
 	}
 	
+	this.buildingXCoord = xParam;
+	
 	this.getPuertaX = function() {
 		return x + puerta.coords.x;
 	}
@@ -51,28 +53,7 @@ function Building(xParam) {
 	}
 	this.init = function() {
 		game.registerMouseClick(mouseClick);
-		
-		var elevatorElements = [];
-		
-		for (var i = 0; i < estructura.length; i++) {
-			elevatorElements.push({x: 10 + x, y: g_baseline - (50 * i) });
-		}
-		
-		elevator = new Elevator(elevatorElements);
-		game.add(elevator);
-		elevator.elevatorArrive = callbackElevator;
 	}
-	
-	var wasoCallback;
-	function callbackElevator(floor) {
-		wasoCallback(floor);
-		//TODO: Otras acciones de building
-	}
-	
-	this.callElevator = function (floor, callback) {
-		wasoCallback = callback;
-		elevator.moveTo(floor);
-	};
 	
 	function mouseClick(mx, my) {
 		for (var piso in estructura) {
