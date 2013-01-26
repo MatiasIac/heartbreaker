@@ -33,6 +33,13 @@ function createDepto(x, y) {
 				self.animacion = self.drawOccupiedFlat;
 			}
 		}
+		
+		this.removeOcupante = function() {
+			self.ocupantes.pop();
+			if (self.ocupantes.length === 0) {
+				self.animacion = self.drawEmptyFlat;
+			}
+		}
 	};
 }
 
@@ -98,10 +105,10 @@ var levels = [
 		wasos:
 			//createWaso(startX, walkSpeed, layer, direction, index) 
 			//los pares son guasos
-			[createWaso(200, 50.3, 13, 1, 0), createWaso(300, 40.3, 13, -1, 1),
-			createWaso(100, 50.3, 13, 1, 2), createWaso(35, 40.3, 13, -1, 3),
-			createWaso(20, 50.3, 13, 1, 4), createWaso(350, 40.3, 13, -1, 5),
-			createWaso(230, 10.3, 13, 1, 6)], 
+			[createWaso(200, 50.3, 13, 1, 0), createWaso(300, 54.3, 13, -1, 1),
+			createWaso(100, 70.3, 13, 1, 2), createWaso(35, 83.3, 13, -1, 3),
+			createWaso(20, 60.3, 13, 1, 4), createWaso(350, 65.3, 13, -1, 5),
+			createWaso(230, 80.3, 13, 1, 6)], 
 		hornerators: 1
 	}
 ];

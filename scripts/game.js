@@ -2,8 +2,10 @@ var g_baseline = 560;
 var game;
 
 function Game() {
+	var timer = 0;
 	var self = this;
 	var wasos;
+	var usedDeptos = [];
 	
 	this.run = function () {
 		game = new MinFwkGame();
@@ -13,14 +15,7 @@ function Game() {
 		
 		makeLevel(0);
 		
-		var wachisList = wasos.getComponents();
-		for (var waso in wachisList) {
-			currentWaso = wachisList[waso];
-			if (currentWaso.depto) {
-				currentWaso.setAction(0);
-				break;
-			}
-		}
+
 	
 		game.add(self);
 		game.sortObjects();
@@ -100,6 +95,7 @@ function Game() {
 				}
 			}
 		}
+		usedDeptos = chosenDeptos.slice(0);
 		
 		//Asignar por lo menos, un pata de lana a uno de los elementos del par
 		for (var i = 0; i < horneators.length; i++) {
@@ -119,8 +115,41 @@ function Game() {
 	}
 	
 	this.update = function(delta) {
-
+		timer -= delta;
+		if (timer < 0) {
+			timer = 0.5 + Math.random() * 1.0;
+			self.actOnSomeGuy();
+		}
 		
+	}
+	
+	this.actOnSomeGuy = function() {
+		var chosenDepto = usedDeptos[Math.floor(Math.random() * usedDeptos.length)];
+		switch (chosenDepto.state) {
+			case "dosAfuera":
+				chosenDepto.owners[0].setAction(0);		
+				chosenDepto.state = "subePrimero";
+				break;
+			case "subePrimero":
+				var ownerActual = chosenDepto.owners[0];
+				if (ownerActual.inside && ownerActual.insideTimeOut < new Date().getTime()) {
+					ownerActual.setAction(3);
+					chosenDepto.state = "bajaPrimero";
+				}
+				
+				break;
+			case "bajaPrimero":
+				chosenDepto.owners[1].setAction(0);
+				chosenDepto.state = "subeSegundo";
+				break;
+			case "subeSegundo":
+				var ownerActual = chosenDepto.owners[1];
+				if (ownerActual.inside && ownerActual.insideTimeOut < new Date().getTime()) {
+					ownerActual.setAction(3);
+					chosenDepto.state = "esperandoUltimo";
+				}
+				
+		}
 	}
 		
 }

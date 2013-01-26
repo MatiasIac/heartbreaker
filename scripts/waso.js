@@ -1,4 +1,9 @@
 function Waso(characteristics) {
+
+	this.isInside = false;
+	this.insideTime = 0;
+	this.insideTimeOut = 0;
+	
 	var direction = characteristics.direction;
 	var self = this;
 
@@ -69,7 +74,14 @@ function Waso(characteristics) {
 		var threshold = 10;
 		
 		if (Math.abs(x - puertaX) < threshold) {
+
+			
+			self.state = 1;
+			self.inside = true;
+			self.insideTime = new Date().getTime();
+			self.insideTimeOut = self.insideTime + Math.floor(3000 + Math.random() * 10000);  
 			currentAction = inHouse;
+			//currentAction = idleInHouse;
 		}		
 	}
 	
@@ -78,6 +90,14 @@ function Waso(characteristics) {
 		self.depto.addOcupante(self);
 		self.visible = false;
 		currentAction = idleInHouse;
+	}
+	
+	function getOut(delta) {
+		self.depto.removeOcupante(self);
+		self.visible = true;
+		self.inside = false;
+		currentAction = wander;
+		self.state = 2;
 	}
 	
 	function idleInHouse (delta) {
@@ -128,6 +148,8 @@ function Waso(characteristics) {
 			case 2:
 				currentAction = idle;
 				break;
+			case 3:
+				currentAction = getOut;
 		}
 	}
 	
