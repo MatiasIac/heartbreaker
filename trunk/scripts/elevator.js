@@ -15,7 +15,7 @@ function Elevator(floors) {
 	this.elevatorArrive = function (floor) {};
 	
 	this.moveTo = function (floorNumber) {
-		movingTo = floorNumber;
+		movingTo = parseInt(floorNumber);
 		drawingPointer = movingDrawing;
 		updatingPointer = movingUpdater;
 	}
