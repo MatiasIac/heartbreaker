@@ -28,6 +28,7 @@ function Building(xParam) {
 		estructura = structure;
 		for (var piso in estructura) {
 			for (var depto in estructura[piso]) {
+				estructura[piso][depto].state = "dosAfuera"; 
 				estructura[piso][depto].piso = piso;
 				estructura[piso][depto].depto = depto;
 				estructura[piso][depto].building = self;
