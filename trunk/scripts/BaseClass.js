@@ -16,5 +16,4 @@ function BaseClass() {
 	
 	this.draw = function(context) {
 	}
-
 }
