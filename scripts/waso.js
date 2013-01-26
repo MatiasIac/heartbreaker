@@ -29,9 +29,9 @@ function Waso(buildingParam, deptoParam, pisoParam) {
 	
 	this.init = function() {
 		x = 10;
-		sprite = spriteR;
-		//currentAction = walkingRight;		
+		sprite = spriteR;	
 		currentAction = goHome;
+		//para testing; currentAction = waitingElevator;
 	}
 	
 	this.visible = true;
@@ -77,7 +77,7 @@ function Waso(buildingParam, deptoParam, pisoParam) {
 	
 	function enterHomeCallback(currentFloor) {
 		deptoObject = self.building.getDepto(self.piso, self.depto);
-		deptoObject.ocupantes.push(self);
+		deptoObject.addOcupante(self);
 	}
 	
 	function callElevator(floor, callback) {
