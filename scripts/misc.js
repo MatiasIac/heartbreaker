@@ -5,7 +5,7 @@ function Misc() {
 	street.src = "graphics/bereda.png";
 
 	var xStreet = 0;
-	var yStreet = 540;
+	var yStreet = 520;
 	
 	this.zOrder = 0;
 	
