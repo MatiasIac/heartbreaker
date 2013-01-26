@@ -14,6 +14,9 @@ function Building(xParam) {
 	var windowSprite = new Image();
 	windowSprite.src = "graphics/window.png";
 	
+	this.getPuertaX = function() {
+		return x + puerta.coords.x;
+	}
 	function getPisoBase(x, y) {
 		return {coords: {x: x, y: y}, state: 0, ocupantes:[], animacion: drawEmptyFlat};
 	}
@@ -33,7 +36,7 @@ function Building(xParam) {
 		getPisoBase(90,200)
 	]);
 	
-	puerta = {
+	var puerta = {
 		coords: {x:70, y: 0}
 	}
 	
