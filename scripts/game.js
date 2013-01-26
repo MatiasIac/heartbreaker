@@ -18,17 +18,17 @@ function Game() {
 				break;
 			}
 		}
-		
-		game.sortObjects();
+	
 		game.add(self);
+		game.sortObjects();
 	};
 	
 	function makeLevel(level) {
 		game.removeAll();
 		
 		var heartCounter = new HeartCounter();
-		heartCounter.totalHeart = 7;
-		heartCounter.totalLives = 1;
+		heartCounter.totalHeart = 0;
+		heartCounter.totalLives = 0;
 		game.add(heartCounter);
 		
 		var buildings = new Composite();
@@ -39,15 +39,15 @@ function Game() {
 		}
 		game.add(buildings);
 		wasos = new Composite();
-		wasos.zOrder = 20;
-		
-		
+		wasos.zOrder = 100;
+				
 		for (var waso in levels[level].wasos) {
 			wasos.add(levels[level].wasos[waso]);
 		}
 		
 		//Contar los pata de lana
 		var lanas = levels[level].hornerators;
+		heartCounter.totalHeart = lanas + 1;
 		
 		//Asignar el pata de lana
 		for (var i = 0; i < lanas; i++) {

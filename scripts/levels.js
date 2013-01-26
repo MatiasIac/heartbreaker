@@ -13,6 +13,9 @@ function createDepto(x, y) {
 		this.owners = [];
 		
 		this.drawOccupiedFlat = function(context, depto, buildingX) {
+			for (var i = 0; i < self.ocupantes.length; i++) {
+				self.ocupantes[i].draw(context, i);
+			}
 			context.drawImage(busySprite, depto.coords.x + buildingX, 
 				g_baseline - depto.coords.y);
 		};

@@ -33,4 +33,6 @@ function Composite() {
 			}			
 		}
 	}
+	
+	this.zOrder = 100;
 }
