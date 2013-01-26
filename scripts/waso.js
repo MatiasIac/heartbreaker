@@ -1,33 +1,24 @@
-function Waso(buildingParam, deptoParam, pisoParam) {
+function Waso(myBuild, characteristics) {
 	var self = this;
 
-	var x = 10;
+	var x = characteristics.startingX;
+	var chars = characteristics;
+	
 	var accumulator = 0;
 	var frame = 0;
-	var finalWidth = 35;
-	var finalHeight = 62;
 	var animationDelay = 0.08;
 	
-	this.building = buildingParam;
-	this.piso = pisoParam;
-	this.depto = deptoParam;
-	
-	this.targetBuilding;
-	this.targetPiso;
-	this.targetDepto;
+	this.building = myBuild;
+	this.piso = characteristics.pisoIndex;
+	this.depto = characteristics.dptoIndex;
+
 	var sprite;
-	
 	var spriteL = new Image();
 	spriteL.src = "graphics/sprite_f_l.png";
-	
 	var spriteR = new Image();
 	spriteR.src = "graphics/sprite_f_r.png";
 	
-	this.zOrder = 100;
-	this.walkerId = 10;
-	
 	this.init = function() {
-		x = 10;
 		sprite = spriteR;	
 		currentAction = goHome;
 		//para testing; currentAction = waitingElevator;
@@ -42,10 +33,11 @@ function Waso(buildingParam, deptoParam, pisoParam) {
 	
 	this.draw = function(context) {
 		context.drawImage(sprite, frame * 35, 0, 35, 62,
-			x, g_baseline - sprite.height, finalWidth, finalHeight);
+			x, g_baseline - sprite.height, 35, 62);
 		context.save();
 			context.fillStyle = "rgb(0,0,0)";
-			context.fillText("id: " + self.walkerId, x + (35 / 2), g_baseline - (sprite.height + 5));
+			context.fillText("id: " + chars.id, x + (35 / 2),
+				g_baseline - (sprite.height + 5));
 		context.restore();
 	}
 	
@@ -110,21 +102,5 @@ function Waso(buildingParam, deptoParam, pisoParam) {
 		}
 	}
 	
-	function walkingLeft(delta) {
-		if (accumulator >= animationDelay) {
-			accumulator = 0;
-			frame--;
-			if (frame < 0) { frame = 8; }
-			x-= 1.3;
-			if (x <= 0) { 
-				sprite = spriteR;
-				currentAction = walkingRight;								
-			}
-			
-			this.draw = function(context) {
-			context.drawImage(sprite, frame * 30, 0, 30, 62,
-				x, g_baseline - sprite.height, finalWidth, finalHeight);
-			}
-		}
-	}
+	this.zOrder = 100;
 }
