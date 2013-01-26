@@ -12,16 +12,21 @@ function Game() {
 		
 		var buildings = new Composite();
 		var building = new Building(120);
-		building.setMyStructure(getStructure(0));
-		
+		var myStruct = getStructure(0);
+		building.setMyStructure(myStruct.data);
+		building.setMyDoor(myStruct.door);
 		buildings.add(building);
 		
 		building = new Building(320);
-		building.setMyStructure(getStructure(1));
+		myStruct = getStructure(1);
+		building.setMyStructure(myStruct.data);
+		building.setMyDoor(myStruct.door);
 		buildings.add(building);
 
 		building = new Building(520);
-		building.setMyStructure(getStructure(2));
+		myStruct = getStructure(2);
+		building.setMyStructure(myStruct.data);
+		building.setMyDoor(myStruct.door);
 		buildings.add(building);
 		
 		buildings.zOrder = 1;

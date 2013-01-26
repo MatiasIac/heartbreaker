@@ -20,16 +20,17 @@ function Building(xParam) {
 	}
 	
 	var estructura = [];
+	var puerta = {};
+	
 	this.setMyStructure = function (structure) {
 		estructura = structure;
 	};
 	
+	this.setMyDoor = function (door) {
+		puerta = door;
+	};
+	
 	this.getMyStructure = estructura;
-	
-	var puerta = {
-		coords: {x:70, y: 0}
-	}
-	
 	this.zOrder = 10;
 	
 	this.init = function() {
