@@ -11,13 +11,6 @@ function Building(xParam) {
 		topLine = g_baseline - buildingSprite.height;
 	}
 	
-	
-	var emptyWindowSprite = new Image();
-	emptyWindowSprite.src = "graphics/window.png";
-		
-	var busyWindowSprite = new Image();
-	busyWindowSprite.src = "graphics/window_busy.png";
-	
 	this.getPuertaX = function() {
 		return x + puerta.coords.x;
 	}
@@ -26,37 +19,12 @@ function Building(xParam) {
 		return estructura[pisoIndex][deptoIndex];
 	}
 	
-	this.getMyStructure = estructura;
-	
-	function getDeptoBase(x, y) {
-		return {
-			coords: {x: x, y: y}, 
-			state: 0, 
-			ocupantes:[], 
-			animacion: drawEmptyFlat,
-			addOcupante: function(ocupante) {
-				this.ocupantes.push(ocupante);
-				if (this.ocupantes.length === 1) {
-					this.animacion = drawOccupiedFlat;
-				}
-			}
-		};
-	}
-	
 	var estructura = [];
-	//Estado 0, vacío
-	estructura.push([
-		getDeptoBase(20,50),
-		getDeptoBase(80,50)
-	]);
-	estructura.push([
-		getDeptoBase(20,120),
-		getDeptoBase(80,120)
-	]);
-	estructura.push([
-		getDeptoBase(20,200),
-		getDeptoBase(90,200)
-	]);
+	this.setMyStructure = function (structure) {
+		estructura = structure;
+	};
+	
+	this.getMyStructure = estructura;
 	
 	var puerta = {
 		coords: {x:70, y: 0}
@@ -80,7 +48,6 @@ function Building(xParam) {
 	}
 	
 	this.callElevator = function (floor, callback) {
-		//elevator.elevatorArrive = callback;
 		wasoCallback = callback;
 		elevator.moveTo(floor);
 	};
@@ -104,16 +71,7 @@ function Building(xParam) {
 	
 	this.visible = true;
 	
-	this.update = function(delta) {
-	}
-	
-	function drawEmptyFlat(context, depto) {
-		context.drawImage(emptyWindowSprite, depto.coords.x + x, g_baseline - depto.coords.y);
-	}
-	
-	function drawOccupiedFlat(context, depto) {
-		context.drawImage(busyWindowSprite, depto.coords.x + x, g_baseline - depto.coords.y);
-	}
+	this.update = function(delta) {	}
 	
 	this.draw = function(context) {
 		context.drawImage(buildingSprite, x, topLine);
