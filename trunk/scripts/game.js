@@ -34,6 +34,17 @@ function Game() {
 			dptoIndex: 0, pisoIndex: 2,
 			isFemale: true
 		});
+		
+		game.add(waso);
+		
+		waso = new Waso({
+			id: 3, startingX: 0,
+			tshirt: 1, pants: 0,
+			head: 2, isHorned: true,
+			myBuilding: buildings.get(2),
+			dptoIndex: 0, pisoIndex: 2,
+			isFemale: false
+		});
 	
 		game.add(waso);
 		game.add(buildings);
