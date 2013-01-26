@@ -10,6 +10,7 @@ function createDepto(x, y) {
 		this.coords = {x: x, y: y};
 		this.state = 0;
 		this.ocupantes = [];
+		this.owners = [];
 		
 		this.drawOccupiedFlat = function(context, depto, buildingX) {
 			context.drawImage(busySprite, depto.coords.x + buildingX, 
