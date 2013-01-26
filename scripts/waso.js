@@ -92,6 +92,11 @@ function Waso(characteristics) {
 		currentAction = idleInHouse;
 	}
 	
+	this.callCheater = function(other) {
+		self.depto = other.depto;
+		currentAction = goHome;
+	}
+	
 	function getOut(delta) {
 		self.depto.removeOcupante(self);
 		self.visible = true;
