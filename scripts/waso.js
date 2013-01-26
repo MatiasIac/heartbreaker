@@ -1,5 +1,5 @@
 function Waso(characteristics) {
-	var factor = 1;
+	var direction = characteristics.direction;
 	var self = this;
 
 	var x = characteristics.startX;
@@ -54,13 +54,13 @@ function Waso(characteristics) {
 		puertaX = self.building.getPuertaX();
 		
 		if (x < puertaX) {
-			factor = 1;
+			direction = 1;
 		} else {
-			factor = -1;
+			direction = -1;
 		}
 		
-		x += chars.walkSpeed * factor * delta;
-		walk(delta, factor);
+		x += chars.walkSpeed * direction * delta;
+		walk(delta, direction);
 		var threshold = 10;
 		
 		if (Math.abs(x - puertaX) < threshold) {
@@ -72,13 +72,13 @@ function Waso(characteristics) {
 		//TODO: Hacer random o por parametro
 		
 		if (x < 0) {
-			factor = 1;
+			direction = 1;
 		} else if (x > 600) {
-			factor = -1;
+			direction = -1;
 		}
 		
-		x += chars.walkSpeed * factor * delta;
-		walk(delta, factor);
+		x += chars.walkSpeed * direction * delta;
+		walk(delta, direction);
 	}
 	
 	function waitingElevator(delta) {
