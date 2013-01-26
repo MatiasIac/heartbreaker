@@ -1,4 +1,4 @@
-function Waso(myBuild, characteristics) {
+function Waso(characteristics) {
 	var self = this;
 
 	var x = characteristics.startingX;
@@ -8,7 +8,7 @@ function Waso(myBuild, characteristics) {
 	var frame = 0;
 	var animationDelay = 0.08;
 	
-	this.building = myBuild;
+	this.building = characteristics.myBuilding;
 	this.piso = characteristics.pisoIndex;
 	this.depto = characteristics.dptoIndex;
 
