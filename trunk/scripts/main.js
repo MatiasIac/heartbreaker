@@ -36,7 +36,9 @@ function MinFwkGame() {
 		if (objectToBeAdded.length != 0) {
 			for (var x = 0; x < objectToBeAdded.length; ++x) {
 				gameObjects.push(objectToBeAdded[x]);
-				objectToBeAdded[x].init();
+				if (objectToBeAdded[x].init) {
+					objectToBeAdded[x].init();
+				}
 			}
 			objectToBeAdded.splice(0, objectToBeAdded.length);
 		}
