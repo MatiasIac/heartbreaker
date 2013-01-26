@@ -6,8 +6,7 @@ function Game() {
 		game = new MinFwkGame();
 		game.init("canvas");
 		
-		var waso = new Waso();
-		game.add(waso);
+		
 		
 		var heartCounter = new HeartCounter();
 		heartCounter.totalHeart = 7;
@@ -17,11 +16,13 @@ function Game() {
 		buildings.add(new Building(120));
 		buildings.add(new Building(320));
 		buildings.add(new Building(520));
+		buildings.zOrder = 1;
+		var waso = new Waso(buildings.get(0));
 		
+		game.add(waso);
 		game.add(buildings);
-		game.add(heartCounter);
-		
 
+		game.add(heartCounter);
 		game.sortObjects();
 	};
 }
