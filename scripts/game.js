@@ -14,6 +14,8 @@ function Game() {
 		heartCounter.totalLives = 1;
 		game.add(heartCounter);
 		game.add(new Building(120));
+		game.add(new Building(320));
+		game.add(new Building(520));
 		game.sortObjects();
 	};
 }

@@ -6,7 +6,7 @@ function Waso() {
 	var frame = 0;
 	var finalWidth = 33;
 	var finalHeight = 62;
-	var animationDelay = 0.09;
+	var animationDelay = 0.04;
 	
 	var sprite = new Image();
 	sprite.src = "graphics/waso.png";

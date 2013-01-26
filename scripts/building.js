@@ -52,7 +52,7 @@ function Building(xParam) {
 				var rectClick = new Rectangle().startupRectangle(mx, my, 10, 10);
 				
 				if (rectClick.intersects(rectWindow)) {
-					alert("Piso: " + piso + ", Dpto: " + depto);
+					game.console.write("Piso: " + piso + ", Dpto: " + depto);
 					break;
 				}
 			}
