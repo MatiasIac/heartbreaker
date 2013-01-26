@@ -14,11 +14,11 @@ function Waso(characteristics) {
 	var spriteR = new Image();
 	
 	if (characteristics.isFemale) {
-		spriteL.src = "graphics/sprite_f_l.png";
-		spriteR.src = "graphics/sprite_f_r.png";
+		spriteL.src = "graphics/0/f_" + characteristics.tshirt + "_" + characteristics.pants + "_l.png";
+		spriteR.src = "graphics/0/f_" + characteristics.tshirt + "_" + characteristics.pants + "_r.png";
 	} else {
-		spriteL.src = "graphics/sprite_m_l.png";
-		spriteR.src = "graphics/sprite_m_r.png";
+		spriteL.src = "graphics/1/m_" + characteristics.tshirt + "_" + characteristics.pants + "_l.png";
+		spriteR.src = "graphics/1/m_" + characteristics.tshirt + "_" + characteristics.pants + "_r.png";
 	}
 	
 	this.init = function() {
@@ -40,18 +40,17 @@ function Waso(characteristics) {
 		if (index !== undefined) {
 			//Estamos dentro de la casa
 			context.drawImage(sprite, frame * 35, 0, 35, 62,
-				self.depto.building.buildingXCoord + self.depto.coords.x, 
+				(self.depto.building.buildingXCoord + self.depto.coords.x), 
 				g_baseline - (self.depto.coords.y), 35, 62);
-			return;
+		} else {
+			context.drawImage(sprite, frame * 35, 0, 35, 62,
+				x, g_baseline - sprite.height, 35, 62);
+			context.save();
+				context.fillStyle = "rgb(0,0,0)";
+				context.fillText("id: " + chars.id + " " + self.isHornerator, x + (35 / 2),
+					g_baseline - (sprite.height + 5));
+			context.restore();
 		}
-		
-		context.drawImage(sprite, frame * 35, 0, 35, 62,
-			x, g_baseline - sprite.height, 35, 62);
-		/*context.save();
-			context.fillStyle = "rgb(0,0,0)";
-			context.fillText("id: " + chars.id + " " + self.isHornerator, x + (35 / 2),
-				g_baseline - (sprite.height + 5));
-		context.restore();*/
 	}
 	
 	var currentAction = function(delta) {};
@@ -70,15 +69,19 @@ function Waso(characteristics) {
 		var threshold = 10;
 		
 		if (Math.abs(x - puertaX) < threshold) {
-			currentAction = idleInHouse;
+			currentAction = inHouse;
 		}		
 	}
 	
 	//Waso actions
-	function idleInHouse(delta) {
+	function inHouse(delta) {
 		self.depto.addOcupante(self);
-		//self.visible = true;
-		currentAction = idle;
+		self.visible = false;
+		currentAction = idleInHouse;
+	}
+	
+	function idleInHouse (delta) {
+		walk(delta, 1);
 	}
 	
 	function wander(delta) {

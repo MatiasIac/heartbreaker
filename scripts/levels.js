@@ -54,25 +54,40 @@ var prefabBuildings =
 
 var prefabPeople = 
 	[{id: 0, 
-		tshirt: 1, 
-		pants: 0,
+		tshirt: "b", 
+		pants: "b",
 		head: 2,
 		isFemale: false},
 	{id: 1, 
-		tshirt: 1, 
-		pants: 0,
+		tshirt: "r", 
+		pants: "p",
 		head: 2,
 		isFemale: true},
 	{id: 2,
-		tshirt: 1, 
-		pants: 0,
+		tshirt: "b", 
+		pants: "b",
 		head: 2,
 		isFemale: false},
 	{id: 3,
-		tshirt: 1, 
-		pants: 0,
+		tshirt: "r", 
+		pants: "p",
 		head: 2,
-		isFemale: true}];   
+		isFemale: true},
+	{id: 4,
+		tshirt: "b", 
+		pants: "b",
+		head: 2,
+		isFemale: false},
+	{id: 5,
+		tshirt: "r", 
+		pants: "p",
+		head: 2,
+		isFemale: true},
+	{id: 6,
+		tshirt: "b", 
+		pants: "b",
+		head: 2,
+		isFemale: false}];
 
 		
 var levels = [
@@ -84,9 +99,9 @@ var levels = [
 			//createWaso(startX, walkSpeed, layer, direction, index) 
 			//los pares son guasos
 			[createWaso(200, 50.3, 13, 1, 0), createWaso(300, 40.3, 13, -1, 1),
-			createWaso(100, 50.3, 13, 1, 0), createWaso(35, 40.3, 13, -1, 1),
-			createWaso(20, 50.3, 13, 1, 0), createWaso(350, 40.3, 13, -1, 1),
-			createWaso(230, 10.3, 13, 1, 0)], 
+			createWaso(100, 50.3, 13, 1, 2), createWaso(35, 40.3, 13, -1, 3),
+			createWaso(20, 50.3, 13, 1, 4), createWaso(350, 40.3, 13, -1, 5),
+			createWaso(230, 10.3, 13, 1, 6)], 
 		hornerators: 1
 	}
 ];
