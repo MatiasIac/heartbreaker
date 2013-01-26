@@ -32,6 +32,8 @@ function Waso(characteristics) {
 	}
 	
 	this.visible = true;
+	this.state = 0; // 0 - Nada / 1 - 
+	this.isHornerator = false; // no es coso
 	
 	this.update = function(delta) {				
 		accumulator += delta;
