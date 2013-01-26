@@ -10,7 +10,11 @@ function Composite() {
 	
 	this.get = function(i) {
 		return components[i];
-	}
+	};
+	
+	this.count = function () {
+		return components.length;
+	};
 	
 	this.update = function(delta) {				
 		for (var index in components) {

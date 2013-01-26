@@ -80,7 +80,9 @@ var levels = [
 		wasos:
 			//createWaso(startX, walkSpeed, layer, direction, index) 
 			//los pares son guasos
-			[createWaso(200, 50.3, 13, 1, 0), createWaso(300, 40.3, 13, -1, 1)], 
+			[createWaso(200, 50.3, 13, 1, 0), createWaso(300, 40.3, 13, -1, 1),
+			createWaso(100, 50.3, 13, 1, 0), createWaso(35, 40.3, 13, -1, 1),
+			createWaso(20, 50.3, 13, 1, 0), createWaso(350, 40.3, 13, -1, 1)], 
 		hornerators: 1
 	}
 ];
