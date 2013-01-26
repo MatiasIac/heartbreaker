@@ -12,6 +12,10 @@ function Composite() {
 		return components[i];
 	};
 	
+	this.getComponents = function() {
+		return components;
+	}
+	
 	this.count = function () {
 		return components.length;
 	};
@@ -24,7 +28,9 @@ function Composite() {
 	
 	this.draw = function(context) {
 		for (var index in components) {
-			components[index].draw(context);
+			if (components[index].visible) {
+				components[index].draw(context);
+			}			
 		}
 	}
 }

@@ -53,7 +53,7 @@ function Waso(characteristics) {
 	var currentAction = function(delta) {};
 	
 	function goHome(delta) {
-		puertaX = self.building.getPuertaX();
+		puertaX = self.depto.building.getPuertaX();
 		
 		if (x < puertaX) {
 			direction = 1;
@@ -88,17 +88,16 @@ function Waso(characteristics) {
 	};
 	
 	function goUpHomeCallback(currentFloor) {
-		callElevator(self.piso, enterHomeCallback);
+		callElevator(self.depto.piso, enterHomeCallback);
 	}
 	
 	function enterHomeCallback(currentFloor) {
-		deptoObject = self.building.getDepto(self.piso, self.depto);
-		deptoObject.addOcupante(self);
+		self.depto.addOcupante(self);
 	}
 	
 	function callElevator(floor, callback) {
 		self.visible = false;
-		self.building.callElevator(floor, callback);  
+		self.depto.building.callElevator(floor, callback);  
 		currentAction = idle;
 	}
 		
@@ -122,6 +121,24 @@ function Waso(characteristics) {
 			}
 		}
 	}
+	
+	this.setAction = function (action) {
+		switch (action) {
+			case 0:
+				currentAction = goHome;
+				break;
+			case 1:
+				currentAction = wander;
+				break;
+			case 2:
+				currentAction = idle;
+				break;
+		}
+		
+		//self.acceptMoreCommands = false;
+	}
+	
+	//this.acceptMoreCommands = true;
 	
 	this.zOrder = 100;
 }

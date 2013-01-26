@@ -24,6 +24,13 @@ function Building(xParam) {
 	
 	this.setMyStructure = function (structure) {
 		estructura = structure;
+		for (var piso in estructura) {
+			for (var depto in estructura[piso]) {
+				estructura[piso][depto].piso = piso;
+				estructura[piso][depto].depto = depto;
+				estructura[piso][depto].building = self;
+			}
+		}	
 	};
 	
 	this.setMyDoor = function (door) {
@@ -33,6 +40,15 @@ function Building(xParam) {
 	this.getMyStructure = estructura;
 	this.zOrder = 10;
 	
+	this.getDeptos = function() {
+		var deptos = [];
+		for (var piso in estructura) {
+			for (var depto in estructura[piso]) {
+				deptos.push(estructura[piso][depto]);
+			}
+		}
+		return deptos;
+	}
 	this.init = function() {
 		game.registerMouseClick(mouseClick);
 		

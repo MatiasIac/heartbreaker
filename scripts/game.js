@@ -3,12 +3,24 @@ var game;
 
 function Game() {
 	var self = this;
+	var wasos;
 	
 	this.run = function () {
 		game = new MinFwkGame();
 		game.init("canvas");
 		makeLevel(0);
+		
+		var wachisList = wasos.getComponents();
+		for (var waso in wachisList) {
+			currentWaso = wachisList[waso];
+			if (currentWaso.depto) {
+				currentWaso.setAction(0);
+				break;
+			}
+		}
+		
 		game.sortObjects();
+		game.add(self);
 	};
 	
 	function makeLevel(level) {
@@ -26,7 +38,7 @@ function Game() {
 			buildings.add(levels[level].buildings[building]);
 		}
 		game.add(buildings);
-		var wasos = new Composite();
+		wasos = new Composite();
 		wasos.zOrder = 20;
 		
 		
@@ -52,17 +64,60 @@ function Game() {
 				}
 			}
 		}
+		
+		
+		//Consigue una lista de todos los wasos, en una copia.
+		wasosAsignables = wasos.getComponents().slice(0);
+		
+		//Buscar lista completa de departamentos
+		var allDeptos = [];
+		myBuildings = buildings.getComponents();
+		for (var i = 0; i < myBuildings.length; i++) {
+			allDeptos = allDeptos.concat(myBuildings[i].getDeptos());
+		}
+		
+		var horneators = []; 
+		//A esta altura, alldeptos tiene todos los departamentos.
+		var deptosAsignables = (wasosAsignables.length - lanas) / 2;
+		var chosenDeptos = [];
+		for (var i = 0; i < deptosAsignables; i++) {
+			var chosenNumber = Math.floor(Math.random() * allDeptos.length);
+			var chosen = allDeptos.splice(chosenNumber, 1)[0];
+			chosenDeptos.push(chosen);	
+			var personasAsignadas = 0;
+			while (personasAsignadas < 2) {
+				var chosenPersonNumber = Math.floor(Math.random() * wasosAsignables.length);
+				personaAsignada = wasosAsignables.splice(chosenPersonNumber, 1)[0];
+				if (personaAsignada.isHornerator) {
+					horneators.push(personaAsignada);
+				} else {
+					personasAsignadas++;
+					chosen.owners.push(personaAsignada);
+					personaAsignada.depto = chosen;
+				}
+			}
+		}
+		
 		//Asignar por lo menos, un pata de lana a uno de los elementos del par
-		
-		
-		game.add(wasos);
-		
-		//Contar todos los dptos
-		//Contar todas las personas
-		
-		//Asignar personas a dptos en pares menos los patas de lana
-		
-
+		for (var i = 0; i < horneators.length; i++) {
+			var chosenDpto = Math.floor(Math.random() * chosenDeptos.length);
+			var c = chosenDeptos.splice(chosenDpto, 1)[0];
+			c.owners[0].pataeLana = horneators[i];
+		}
+	
+		game.add(wasos);	
 	}
 	
+	this.draw = function(context) {
+	}
+	
+	this.init = function() {
+	
+	}
+	
+	this.update = function(delta) {
+
+		
+	}
+		
 }
