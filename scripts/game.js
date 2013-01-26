@@ -15,9 +15,10 @@ function Game() {
 		
 		makeLevel(0);
 		
-
-	
 		game.add(self);
+		
+		game.add(new FrontMisc());
+		
 		game.sortObjects();
 	};
 	
