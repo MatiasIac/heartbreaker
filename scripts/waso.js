@@ -14,9 +14,15 @@ function Waso(characteristics) {
 
 	var sprite;
 	var spriteL = new Image();
-	spriteL.src = "graphics/sprite_f_l.png";
 	var spriteR = new Image();
-	spriteR.src = "graphics/sprite_f_r.png";
+	
+	if (characteristics.isFemale) {
+		spriteL.src = "graphics/sprite_f_l.png";
+		spriteR.src = "graphics/sprite_f_r.png";
+	} else {
+		spriteL.src = "graphics/sprite_m_l.png";
+		spriteR.src = "graphics/sprite_m_r.png";
+	}
 	
 	this.init = function() {
 		sprite = spriteR;	
