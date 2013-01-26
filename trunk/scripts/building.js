@@ -65,7 +65,18 @@ function Building(xParam) {
 				var rectClick = new Rectangle().startupRectangle(mx, my, 10, 10);
 				
 				if (rectClick.intersects(rectWindow)) {
+					var ocupantes = estructura[piso][depto]["ocupantes"];
+					var isRapperThere = false;
+					if (ocupantes.length === 2) {
+						for (var i = 0; i < ocupantes.length; i++) {
+							if (ocupantes[i].pataeLana !== undefined) {
+								isRapperThere = true;
+								break;
+							}
+						}
+					}
 					game.console.append("Piso: " + piso + ", Dpto: " + depto);
+					game.console.append("Ocupantes: " + ocupantes.length + ", esta en trampa: " + isRapperThere);
 					break;
 				}
 			}
