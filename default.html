@@ -9,12 +9,18 @@
 	<canvas id="canvas" width="800" height="600"
 		style="background-color:white"></canvas>
 </body>
-
-<div id="console"></div>
+<input type="button" value="Clear" onclick="ClearConsole();"
+	style="position: absolute; top: 10px; left: 5px;">
+<div id="console" style="position: absolute; top: 30px; left: 5px;
+	width: 200px;"></div>
 <div id="mouser"></div>
 <div id="keyboard"></div>
 <script>
 	new Game().run();
+	
+	function ClearConsole() {
+		game.console.clear();
+	}
 	
 	/*game.registerMouseClick(MouseClick);
 	game.registerKeyPress(KeyPress);
