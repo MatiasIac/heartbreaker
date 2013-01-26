@@ -5,6 +5,7 @@ function Composite() {
 	
 	this.add = function(obj) {
 		components.push(obj);
+		obj.init();
 	}
 	
 	this.get = function(i) {

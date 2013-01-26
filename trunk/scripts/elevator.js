@@ -1,4 +1,3 @@
-
 function Elevator(floors) {
 	var self = this;
 	var theFloors = floors;
@@ -22,8 +21,8 @@ function Elevator(floors) {
 	}
 	
 	this.init = function() {
-		drawingPointer = iddleDrawing;
-		updatingPointer = iddleUpdater;
+		drawingPointer = idleDrawing;
+		updatingPointer = idleUpdater;
 	}
 	
 	this.update = function(delta) {
@@ -44,8 +43,8 @@ function Elevator(floors) {
 			if (actualFloor === movingTo && 
 				(frameMoving === 5 || frameMoving === 7)) {
 				frameMoving = 6;
-				drawingPointer = iddleDrawing;
-				updatingPointer = iddleUpdater;
+				drawingPointer = idleDrawing;
+				updatingPointer = idleUpdater;
 				self.elevatorArrive(actualFloor);
 			} else if (actualFloor < movingTo) {
 				if (frameMoving === 0 && actualFloor !== movingTo) {
@@ -82,15 +81,9 @@ function Elevator(floors) {
 		}
 	}
 	
-	function iddleUpdater(delta) {
-		counter += delta;
-		if (counter >= 5) {
-			counter = 0;
-			self.moveTo(0);
-		}
-	}
+	function idleUpdater(delta) {	}
 	
-	function iddleDrawing(context) {
+	function idleDrawing(context) {
 		for (var i = 0; i < theFloors.length; i++) {
 			if (i === actualFloor) {
 				context.drawImage(sprite, 216, 0, 36, 35,
@@ -102,6 +95,6 @@ function Elevator(floors) {
 		}
 	}
 	
-	this.zOrder = 100;
+	this.zOrder = 1000;
 	this.visible = true;
 }

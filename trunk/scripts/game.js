@@ -17,17 +17,18 @@ function Game() {
 		buildings.add(new Building(320));
 		buildings.add(new Building(520));
 		buildings.zOrder = 1;
-		var waso = new Waso(buildings.get(0));
 		
+		var waso = new Waso(buildings.get(0), 2, 1);
+	
 		game.add(waso);
 		game.add(buildings);
 
 		game.add(heartCounter);
 		
-		var elevator = new Elevator([{x: 100, y: 250},
+		/*var elevator = new Elevator([{x: 100, y: 250},
 			{x: 100, y: 200},
 			{x: 100, y: 150}]);
-		game.add(elevator);
+		game.add(elevator);*/
 
 		game.sortObjects();
 	};

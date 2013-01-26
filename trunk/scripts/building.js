@@ -1,7 +1,7 @@
 function Building(xParam) {
 	var self = this;
 	var x = xParam;
-
+	var elevator;
 	
 	var buildingSprite = new Image();
 	buildingSprite.src = "graphics/edificio.png";
@@ -17,23 +17,35 @@ function Building(xParam) {
 	this.getPuertaX = function() {
 		return x + puerta.coords.x;
 	}
-	function getPisoBase(x, y) {
-		return {coords: {x: x, y: y}, state: 0, ocupantes:[], animacion: drawEmptyFlat};
+	
+	this.getDepto = function(pisoIndex, deptoIndex) {
+		return estructura[pisoIndex][deptoIndex];
+	}
+	
+	this.getMyStructure = estructura;
+	
+	function getDeptoBase(x, y) {
+		return {
+			coords: {x: x, y: y}, 
+			state: 0, 
+			ocupantes:[], 
+			animacion: drawEmptyFlat
+		};
 	}
 	
 	var estructura = [];
 	//Estado 0, vacío
 	estructura.push([
-		getPisoBase(20,50),
-		getPisoBase(80,50)
+		getDeptoBase(20,50),
+		getDeptoBase(80,50)
 	]);
 	estructura.push([
-		getPisoBase(20,120),
-		getPisoBase(80,120)
+		getDeptoBase(20,120),
+		getDeptoBase(80,120)
 	]);
 	estructura.push([
-		getPisoBase(20,200),
-		getPisoBase(90,200)
+		getDeptoBase(20,200),
+		getDeptoBase(90,200)
 	]);
 	
 	var puerta = {
@@ -44,7 +56,24 @@ function Building(xParam) {
 	
 	this.init = function() {
 		game.registerMouseClick(mouseClick);
+		elevator = new Elevator([{x: 10 + x, y: g_baseline - 50 },
+			{x: 10 + x, y: g_baseline - 120},
+			{x: 10 + x, y: g_baseline - 200}]);
+		game.add(elevator);
+		elevator.elevatorArrive = callbackElevator;
 	}
+	
+	var wasoCallback;
+	function callbackElevator(floor) {
+		wasoCallback(floor);
+		//TODO: Otras acciones de building
+	}
+	
+	this.callElevator = function (floor, callback) {
+		//elevator.elevatorArrive = callback;
+		wasoCallback = callback;
+		elevator.moveTo(floor);
+	};
 	
 	function mouseClick(mx, my) {
 		for (var piso in estructura) {
