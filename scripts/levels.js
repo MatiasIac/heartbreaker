@@ -33,20 +33,70 @@ function createDepto(x, y) {
 	};
 }
 
-var s = [{ data: [[createDepto(20,50),createDepto(80,50)],
-				  [createDepto(20,120),createDepto(80,120)],
-				  [createDepto(20,200),createDepto(90,200)]],
-		   door: {coords: {x:150, y: 0}}},
-		  {data: [[createDepto(20,50),createDepto(80,50)],
-				  [createDepto(20,120),createDepto(80,120)],
-				  [createDepto(20,200),createDepto(90,200)]],
-		   door: {coords: {x:20, y: 0}}},
-		  {data: [[createDepto(20,50),createDepto(80,50)],
-				  [createDepto(20,120),createDepto(80,120)],
-				  [createDepto(40,200),createDepto(90,200)]],
-		   door: {coords: {x: 100, y: 0}}}
-	   ];
 
-function getStructure(i) {
-	return s[i];
+var prefabBuildings = 
+	[{data: [[createDepto(20,50),createDepto(80,50)],
+			  [createDepto(20,120),createDepto(80,120)],
+			  [createDepto(20,200),createDepto(90,200)]],
+	   door: {coords: {x:150, y: 0}}},
+	  {data: [[createDepto(20,50),createDepto(80,50)],
+			  [createDepto(20,120),createDepto(80,120)],
+			  [createDepto(20,200),createDepto(90,200)]],
+	   door: {coords: {x:20, y: 0}}},
+	  {data: [[createDepto(20,50),createDepto(80,50)],
+			  [createDepto(20,120),createDepto(80,120)],
+			  [createDepto(40,200),createDepto(90,200)]],
+	   door: {coords: {x: 100, y: 0}}}
+   ];
+
+var prefabPeople = 
+	[{id: 0, 
+		tshirt: 1, 
+		pants: 0,
+		head: 2,
+		isFemale: false},
+	{id: 1, 
+		tshirt: 1, 
+		pants: 0,
+		head: 2,
+		isFemale: true},
+	{id: 2,
+		tshirt: 1, 
+		pants: 0,
+		head: 2,
+		isFemale: false},
+	{id: 3,
+		tshirt: 1, 
+		pants: 0,
+		head: 2,
+		isFemale: true}];   
+
+		
+var levels = [
+	{
+		buildings:
+			[createBuilding(70, 0), createBuilding(480, 2)],
+		
+		wasos:
+			//createWaso(startX, walkSpeed, layer, index) 
+			//los pares son guasos
+			[createWaso(200, 50.3, 13, 0), createWaso(300, 40.3, 13, 1)]
+	}
+];
+
+function createBuilding(x, index){
+	var building = new Building(x);
+	var myStruct = prefabBuildings[index];
+	building.setMyStructure(myStruct.data);
+	building.setMyDoor(myStruct.door);
+	return building;
+}
+
+function createWaso(startX, walkSpeed, layer, index) {
+	var caracteristicas = prefabPeople[index];
+	caracteristicas.startX = startX;
+	caracteristicas.walkSpeed = walkSpeed;
+	caracteristicas.layer = layer;
+	var waso = new Waso(caracteristicas); 
+	return waso;
 }
