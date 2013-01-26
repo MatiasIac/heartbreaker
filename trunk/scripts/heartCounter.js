@@ -8,7 +8,6 @@ function HeartCounter() {
 	var beater = function () {};
 	var beaterCounter = 0;
 	var beatSwitch = 0;
-	//var beatSize = -5;
 	
 	voidHeart.src = "graphics/heartbeatvoid.png";
 	heart.src = "graphics/heartbeat.png";
@@ -28,11 +27,11 @@ function HeartCounter() {
 	this.update = function(delta) {
 		counter += delta;
 		
-		if (counter >= 0.4) {
+		if (counter >= 0.95) {
 			counter = 0;
 			beater = function () {
 				beaterCounter += delta;
-				if (beaterCounter >= 0.10) {
+				if (beaterCounter >= 0.1) {
 					beaterCounter = 0;
 					doBeat();
 				}
