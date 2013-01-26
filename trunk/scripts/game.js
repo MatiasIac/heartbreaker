@@ -1,4 +1,4 @@
-var g_baseline = 540;
+var g_baseline = 550;
 var game;
 
 function Game() {
@@ -8,6 +8,9 @@ function Game() {
 	this.run = function () {
 		game = new MinFwkGame();
 		game.init("canvas");
+		
+		game.add(new Misc());
+		
 		makeLevel(0);
 		
 		var wachisList = wasos.getComponents();
