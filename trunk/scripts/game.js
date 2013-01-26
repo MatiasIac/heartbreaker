@@ -1,4 +1,4 @@
-var g_baseline = 500;
+var g_baseline = 540;
 var game;
 
 function Game() {
