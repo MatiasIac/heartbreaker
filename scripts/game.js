@@ -17,11 +17,11 @@ function Game() {
 		buildings.add(building);
 		
 		building = new Building(320);
-		building.setMyStructure(getStructure(0));
+		building.setMyStructure(getStructure(1));
 		buildings.add(building);
 
 		building = new Building(520);
-		building.setMyStructure(getStructure(0));
+		building.setMyStructure(getStructure(2));
 		buildings.add(building);
 		
 		buildings.zOrder = 1;

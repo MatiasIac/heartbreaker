@@ -15,17 +15,16 @@ function Waso(buildingParam, deptoParam, pisoParam) {
 	this.targetBuilding;
 	this.targetPiso;
 	this.targetDepto;
-
-	
 	var sprite;
+	
 	var spriteL = new Image();
 	spriteL.src = "graphics/sprite_f_l.png";
 	
 	var spriteR = new Image();
 	spriteR.src = "graphics/sprite_f_r.png";
 	
-	
 	this.zOrder = 100;
+	this.walkerId = 10;
 	
 	this.init = function() {
 		x = 10;
@@ -44,6 +43,10 @@ function Waso(buildingParam, deptoParam, pisoParam) {
 	this.draw = function(context) {
 		context.drawImage(sprite, frame * 35, 0, 35, 62,
 			x, g_baseline - sprite.height, finalWidth, finalHeight);
+		context.save();
+			context.fillStyle = "rgb(0,0,0)";
+			context.fillText("id: " + self.walkerId, x + (35 / 2), g_baseline - (sprite.height + 5));
+		context.restore();
 	}
 	
 	var currentAction = function(delta) {};
