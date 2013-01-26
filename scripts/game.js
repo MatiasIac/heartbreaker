@@ -12,10 +12,16 @@ function Game() {
 		var heartCounter = new HeartCounter();
 		heartCounter.totalHeart = 7;
 		heartCounter.totalLives = 1;
+		
+		buildings = new Composite();
+		buildings.add(new Building(120));
+		buildings.add(new Building(320));
+		buildings.add(new Building(520));
+		
+		game.add(buildings);
 		game.add(heartCounter);
-		game.add(new Building(120));
-		game.add(new Building(320));
-		game.add(new Building(520));
+		
+
 		game.sortObjects();
 	};
 }

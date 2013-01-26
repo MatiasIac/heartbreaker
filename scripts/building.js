@@ -1,13 +1,14 @@
 function Building(xParam) {
 	var self = this;
 	var x = xParam;
-	var baseline;
+
 	
 	var buildingSprite = new Image();
 	buildingSprite.src = "graphics/edificio.png";
+	var topLine;
 	
 	buildingSprite.onload = function() {
-		baseline = g_baseline - buildingSprite.height;
+		topLine = g_baseline - buildingSprite.height;
 	}
 	
 	var windowSprite = new Image();
@@ -20,16 +21,16 @@ function Building(xParam) {
 	var estructura = [];
 	//Estado 0, vacío
 	estructura.push([
-		getPisoBase(20,20),
-		getPisoBase(80,20)
+		getPisoBase(20,50),
+		getPisoBase(80,50)
 	]);
 	estructura.push([
-		getPisoBase(20,80),
-		getPisoBase(80,80)
+		getPisoBase(20,120),
+		getPisoBase(80,120)
 	]);
 	estructura.push([
-		getPisoBase(20,170),
-		getPisoBase(80,170)
+		getPisoBase(20,200),
+		getPisoBase(90,200)
 	]);
 	
 	puerta = {
@@ -47,7 +48,7 @@ function Building(xParam) {
 			for (var depto in estructura[piso]) {
 				var rectWindow = new Rectangle().startupRectangle(
 					estructura[piso][depto]["coords"].x + x,
-					estructura[piso][depto]["coords"].y + baseline, 55, 40);
+					g_baseline - estructura[piso][depto]["coords"].y, 55, 40);
 				
 				var rectClick = new Rectangle().startupRectangle(mx, my, 10, 10);
 				
@@ -65,11 +66,11 @@ function Building(xParam) {
 	}
 	
 	function drawEmptyFlat(context, depto) {
-		context.drawImage(windowSprite, depto.coords.x + x, depto.coords.y + baseline);
+		context.drawImage(windowSprite, depto.coords.x + x, g_baseline - depto.coords.y);
 	}
 	
 	this.draw = function(context) {
-		context.drawImage(buildingSprite, x, baseline);
+		context.drawImage(buildingSprite, x, topLine);
 		for (var piso in estructura) {
 			for (var depto in estructura[piso]) {
 				estructura[piso][depto]["animacion"](context, estructura[piso][depto]);		
