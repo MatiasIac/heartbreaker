@@ -5,6 +5,7 @@
 <script src="scripts/main.js"></script>
 <script src="scripts/composite.js"></script>
 <script src="scripts/building.js"></script>
+<script src="scripts/elevator.js"></script>
 <script src="scripts/game.js"></script>
 <body style="text-align:center; background-color:gray">
 	<canvas id="canvas" width="800" height="600"
@@ -23,13 +24,7 @@
 		game.console.clear();
 	}
 	
-	/*game.registerMouseClick(MouseClick);
-	game.registerKeyPress(KeyPress);
-	
-	function MouseClick(x, y) {
-		var m = document.getElementById("mouser");
-		m.innerHTML = "X: " + x + ", Y:" + y;
-	}
+	/*game.registerKeyPress(KeyPress);
 	
 	function KeyPress(charCode) {
 		var m = document.getElementById("keyboard");

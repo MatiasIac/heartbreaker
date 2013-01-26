@@ -23,6 +23,12 @@ function Game() {
 		game.add(buildings);
 
 		game.add(heartCounter);
+		
+		var elevator = new Elevator([{x: 100, y: 250},
+			{x: 100, y: 200},
+			{x: 100, y: 150}]);
+		game.add(elevator);
+
 		game.sortObjects();
 	};
 }
