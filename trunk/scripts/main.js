@@ -98,6 +98,14 @@ function MinFwkGame() {
 		this.write = function (text) {
 			console.innerHTML = text;
 		}
+		
+		this.append = function (text) {
+			console.innerHTML += "<br>" + text;
+		}
+		
+		this.clear = function() {
+			console.innerHTML = "";
+		}
 	};
 	
 	function mouseClick(e) {
