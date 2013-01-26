@@ -7,6 +7,7 @@ function MinFwkGame() {
 	var self = this;
 	var objectToBeAdded = new Array();
 	var objectToDeleted = new Array();
+	var console = document.getElementById("console");
 
 	this.init = function (canvasName) {
 		canvas = document.getElementById(canvasName);
@@ -92,6 +93,12 @@ function MinFwkGame() {
 		canvas.removeEventListener("click", mouseClick, false);
 		mouseCallers = [];
 	}
+	
+	this.console = new function (){
+		this.write = function (text) {
+			console.innerHTML = text;
+		}
+	};
 	
 	function mouseClick(e) {
 		var x;
