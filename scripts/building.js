@@ -4,7 +4,7 @@ function Building(xParam) {
 	var elevator;
 	
 	var buildingSprite = new Image();
-	buildingSprite.src = "graphics/edificio2.png";
+	buildingSprite.src = "graphics/edificio3.png";
 	var topLine;
 	
 	buildingSprite.onload = function() {
