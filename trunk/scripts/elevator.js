@@ -2,7 +2,7 @@ function Elevator(floors) {
 	var self = this;
 	var theFloors = floors;
 	var totalFloors = floors.length;
-	var actualFloor = 2;
+	var actualFloor = 0;
 	var movingTo = 0;
 	var counter = 0;
 	

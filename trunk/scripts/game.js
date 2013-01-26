@@ -18,7 +18,7 @@ function Game() {
 		buildings.add(new Building(520));
 		buildings.zOrder = 1;
 		
-		var waso = new Waso(buildings.get(0), 2, 1);
+		var waso = new Waso(buildings.get(0), 1, 2);
 	
 		game.add(waso);
 		game.add(buildings);

@@ -11,8 +11,12 @@ function Building(xParam) {
 		topLine = g_baseline - buildingSprite.height;
 	}
 	
-	var windowSprite = new Image();
-	windowSprite.src = "graphics/window.png";
+	
+	var emptyWindowSprite = new Image();
+	emptyWindowSprite.src = "graphics/window.png";
+		
+	var busyWindowSprite = new Image();
+	busyWindowSprite.src = "graphics/window_busy.png";
 	
 	this.getPuertaX = function() {
 		return x + puerta.coords.x;
@@ -29,7 +33,13 @@ function Building(xParam) {
 			coords: {x: x, y: y}, 
 			state: 0, 
 			ocupantes:[], 
-			animacion: drawEmptyFlat
+			animacion: drawEmptyFlat,
+			addOcupante: function(ocupante) {
+				this.ocupantes.push(ocupante);
+				if (this.ocupantes.length === 1) {
+					this.animacion = drawOccupiedFlat;
+				}
+			}
 		};
 	}
 	
@@ -98,7 +108,11 @@ function Building(xParam) {
 	}
 	
 	function drawEmptyFlat(context, depto) {
-		context.drawImage(windowSprite, depto.coords.x + x, g_baseline - depto.coords.y);
+		context.drawImage(emptyWindowSprite, depto.coords.x + x, g_baseline - depto.coords.y);
+	}
+	
+	function drawOccupiedFlat(context, depto) {
+		context.drawImage(busyWindowSprite, depto.coords.x + x, g_baseline - depto.coords.y);
 	}
 	
 	this.draw = function(context) {
