@@ -56,7 +56,7 @@ function MinFwkGame() {
 		var delta = (thisFrame - this.lastFrame) / 1000;
 		this.lastFrame = thisFrame;
 		
-		backBuffer.fillStyle = "rgb(255,255,255)";
+		backBuffer.fillStyle = "rgb(0,0,0)";
 		backBuffer.fillRect(0, 0, canvas.width, canvas.height);
 		
 		for (var i = 0; i < gameObjects.length; i++) {
