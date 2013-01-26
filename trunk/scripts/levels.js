@@ -78,9 +78,9 @@ var levels = [
 			[createBuilding(70, 0), createBuilding(480, 2)],
 		
 		wasos:
-			//createWaso(startX, walkSpeed, layer, index) 
+			//createWaso(startX, walkSpeed, layer, direction, index) 
 			//los pares son guasos
-			[createWaso(200, 50.3, 13, 0), createWaso(300, 40.3, 13, 1)]
+			[createWaso(200, 50.3, 13, 1, 0), createWaso(300, 40.3, 13, -1, 1)]
 	}
 ];
 
@@ -92,9 +92,10 @@ function createBuilding(x, index){
 	return building;
 }
 
-function createWaso(startX, walkSpeed, layer, index) {
+function createWaso(startX, walkSpeed, layer, direction, index) {
 	var caracteristicas = prefabPeople[index];
 	caracteristicas.startX = startX;
+	caracteristicas.direction = direction;
 	caracteristicas.walkSpeed = walkSpeed;
 	caracteristicas.layer = layer;
 	var waso = new Waso(caracteristicas); 
