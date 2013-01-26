@@ -38,17 +38,17 @@ function createDepto(x, y) {
 
 
 var prefabBuildings = 
-	[{data: [[createDepto(20,50),createDepto(80,50)],
-			  [createDepto(20,120),createDepto(80,120)],
-			  [createDepto(20,200),createDepto(90,200)]],
+	[{data: [[createDepto(50,140),createDepto(140,140)],
+			  [createDepto(50,220),createDepto(150,220)],
+			  [createDepto(30,300),createDepto(140,300)]],
 	   door: {coords: {x:150, y: 0}}},
-	  {data: [[createDepto(20,50),createDepto(80,50)],
-			  [createDepto(20,120),createDepto(80,120)],
-			  [createDepto(20,200),createDepto(90,200)]],
+	  {data: [[createDepto(50,140),createDepto(140,140)],
+			  [createDepto(50,220),createDepto(150,220)],
+			  [createDepto(30,300),createDepto(140,300)]],
 	   door: {coords: {x:20, y: 0}}},
-	  {data: [[createDepto(20,50),createDepto(80,50)],
-			  [createDepto(20,120),createDepto(80,120)],
-			  [createDepto(40,200),createDepto(90,200)]],
+	  {data: [[createDepto(50,140),createDepto(140,140)],
+			  [createDepto(50,220),createDepto(150,220)],
+			  [createDepto(30,300),createDepto(140,300)]],
 	   door: {coords: {x: 100, y: 0}}}
    ];
 
@@ -93,7 +93,7 @@ var prefabPeople =
 var levels = [
 	{
 		buildings:
-			[createBuilding(70, 0), createBuilding(480, 2)],
+			[createBuilding(40, 0), createBuilding(430, 2)],
 		
 		wasos:
 			//createWaso(startX, walkSpeed, layer, direction, index) 
