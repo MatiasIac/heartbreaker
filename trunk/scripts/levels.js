@@ -38,9 +38,9 @@ var s = [{ data: [[createDepto(20,50),createDepto(80,50)],
 		  {data: [[createDepto(20,50),createDepto(80,50)],
 				  [createDepto(20,120),createDepto(80,120)],
 				  [createDepto(20,200),createDepto(90,200)]]},
-	{data: [[createDepto(20,50),createDepto(80,50)],
-	[createDepto(20,120),createDepto(80,120)],
-	[createDepto(40,200),createDepto(90,200)]]
+		  {data: [[createDepto(20,50),createDepto(80,50)],
+				  [createDepto(20,120),createDepto(80,120)],
+				  [createDepto(40,200),createDepto(90,200)]]
 	}];
 
 function getStructure(i) {
