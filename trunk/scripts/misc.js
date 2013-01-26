@@ -3,6 +3,8 @@ function Misc() {
 	
 	var street = new Image();
 	street.src = "graphics/bereda.png";
+	var cloud = new Image();
+	cloud.src = "graphics/fondo.png";
 
 	var xStreet = 0;
 	var yStreet = 520;
@@ -17,6 +19,7 @@ function Misc() {
 	}
 	
 	this.draw = function(context) {
+		context.drawImage(cloud, 0, 0);
 		context.drawImage(street, xStreet, yStreet);
 	}
 }
