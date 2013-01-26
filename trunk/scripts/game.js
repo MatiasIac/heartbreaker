@@ -26,11 +26,12 @@ function Game() {
 		
 		buildings.zOrder = 1;
 		
-		var waso = new Waso(buildings.get(0), {
+		var waso = new Waso({
 			id: 2, startingX: 400,
 			tshirt: 1, pants: 0,
 			head: 2, isHorned: true,
-			dptoIndex: 0, pisoIndex: 1
+			myBuilding: buildings.get(0),
+			dptoIndex: 0, pisoIndex: 0
 		});
 	
 		game.add(waso);
