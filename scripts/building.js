@@ -36,7 +36,7 @@ function Building(xParam) {
 		coords: {x:70, y: 0}
 	}
 	
-	this.zOrder = 100;
+	this.zOrder = 10;
 	
 	this.init = function() {
 		game.registerMouseClick(mouseClick);
