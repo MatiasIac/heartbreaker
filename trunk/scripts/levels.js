@@ -35,17 +35,18 @@ function createDepto(x, y) {
 
 var s = [{ data: [[createDepto(20,50),createDepto(80,50)],
 				  [createDepto(20,120),createDepto(80,120)],
-				  [createDepto(20,200),createDepto(90,200)]]},
+				  [createDepto(20,200),createDepto(90,200)]],
+		   door: {coords: {x:150, y: 0}}},
 		  {data: [[createDepto(20,50),createDepto(80,50)],
 				  [createDepto(20,120),createDepto(80,120)],
-				  [createDepto(20,200),createDepto(90,200)]]},
+				  [createDepto(20,200),createDepto(90,200)]],
+		   door: {coords: {x:20, y: 0}}},
 		  {data: [[createDepto(20,50),createDepto(80,50)],
 				  [createDepto(20,120),createDepto(80,120)],
-				  [createDepto(40,200),createDepto(90,200)]]
-	}];
+				  [createDepto(40,200),createDepto(90,200)]],
+		   door: {coords: {x: 100, y: 0}}}
+	   ];
 
 function getStructure(i) {
-	var data = s[i].data;
-	
-	return data;
+	return s[i];
 }
