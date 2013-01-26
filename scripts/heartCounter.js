@@ -1,6 +1,6 @@
 function HeartCounter() {
 	var self = this;
-	var heartSize = 30;
+	var heartSize = 50;
 	var heart = new Image();
 	var voidHeart = new Image();
 	
