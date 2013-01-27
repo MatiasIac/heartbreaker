@@ -11,20 +11,21 @@ function Game() {
 		game = new MinFwkGame();
 		game.init("canvas");
 		
-		game.add(new Misc());
-		
-		makeLevel(0);
-		
-		game.add(self);
-		
-		game.add(new FrontMisc());
-		
-		game.sortObjects();
+		var portada = new Portada();
+		portada.startGameRef = startGame;
+		game.add(portada);
 	};
 	
-	function makeLevel(level) {
+	function startGame() {
 		game.removeAll();
-		
+		game.add(new Misc());
+		makeLevel(0);
+		game.add(self);
+		game.add(new FrontMisc());
+		game.sortObjects();
+	}
+	
+	function makeLevel(level) {
 		var heartCounter = new HeartCounter();
 		game.add(heartCounter);
 		
