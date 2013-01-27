@@ -89,11 +89,12 @@ function Building(xParam) {
 	this.update = function(delta) {	}
 	
 	this.draw = function(context) {
-		context.drawImage(buildingSprite, x, topLine);
+		//context.drawImage(buildingSprite, x, topLine);
 		for (var piso in estructura) {
 			for (var depto in estructura[piso]) {
 				estructura[piso][depto]["animacion"](context, estructura[piso][depto], x);		
 			}
 		}
+		context.drawImage(buildingSprite, x, topLine);
 	}
 }

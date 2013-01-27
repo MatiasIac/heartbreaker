@@ -178,6 +178,19 @@ function Game() {
 					}
 				}
 				break;
+			case "esperandoPataDeLana": 
+				var ownerActual = chosenDepto.owners[1];
+				if (ownerActual.inside && ownerActual.insideTimeOut < new Date().getTime()) {					
+					chosenDepto.state = "bajaPersianaPataDeLana";
+				}
+			break;
+			case "esperandoPareja" :
+				var ownerActual = chosenDepto.owners[1];
+				if (ownerActual.inside && ownerActual.insideTimeOut < new Date().getTime()) {
+					chosenDepto.state = "bajaSegundo";
+				}
+			
+			break;
 
 		}
 	}
