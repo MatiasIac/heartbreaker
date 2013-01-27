@@ -95,6 +95,11 @@ var prefabPeople =
 		tshirt: "r", 
 		pants: "r",
 		head: 2,
+		isFemale: false},
+	{id: 7,
+		tshirt: "d", 
+		pants: "d",
+		head: 2,
 		isFemale: false}];
 
 		
@@ -109,7 +114,7 @@ var levels = [
 			[createWaso(200, 50.3, 13, 1, 0), createWaso(300, 54.3, 13, -1, 1),
 			createWaso(100, 70.3, 13, 1, 2), createWaso(35, 83.3, 13, -1, 3),
 			createWaso(20, 60.3, 13, 1, 4), createWaso(350, 65.3, 13, -1, 5),
-			createWaso(230, 80.3, 13, 1, 6)], 
+			createWaso(230, 80.3, 13, 1, 7)], 
 		hornerators: 1
 	}
 ];
