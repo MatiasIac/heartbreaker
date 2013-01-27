@@ -15,7 +15,7 @@ function Game() {
 	heartBeat.src = "fx/heartBeat.wav";
 	
 	function loadSacrified() {
-		for (var i = 0; i < 7; i++) {
+		for (var i = 0; i < 14; i++) {
 			var s = new Image();
 			s.src = "graphics/sacrificied" + i + ".png";
 			pictureBag.push(s);
@@ -165,7 +165,7 @@ function Game() {
 		var angleX = x + shakeX;
 		var angleY = y + shakeY;
 		
-		knifeAngle =  -120 + (((angleX -220) * (angleX - 220)) +  ((angleY - 80) * (angleY - 80))) * + 0.01;
+		knifeAngle =  -120 + (((angleX -220) * (angleX - 220)) +  ((angleY - 100) * (angleY - 100))) * + 0.01;
 		
 		if (knifeAngle >  0) {
 			knifeAngle = -0;
@@ -293,11 +293,16 @@ function Game() {
 			knifeOffsetY = 0;
 			
 			timerValue -= 2;
+			if (timerValue < 0)	{
+				timerValue = 0;
+			}
 			points--;
 			levelFriction -= 0.5;
 			
 			if (levelFriction < 0) { levelFriction = 0; }
-			if (points < 0) { points = 0; }
+			if (points < 0) { 
+				points = 0; 
+			}
 			
 			showMouseEnabled = true;
 			currentUpdater = normalUpdate;
