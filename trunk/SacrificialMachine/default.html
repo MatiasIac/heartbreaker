@@ -4,24 +4,11 @@
 <script src="scripts/main.js"></script>
 <body style="text-align:center; background-color:gray">
 	<canvas id="canvas" width="640" height="200"
-		style="background-color:white"></canvas>
+		style="background-color:white; cursor: none;"></canvas>
 </body>
 <script>
 	var fwk = new MinFwkGame();
 	fwk.init("canvas");
 	
 	fwk.add(new Game());
-	
-	/*game.registerMouseClick(MouseClick);
-	game.registerKeyPress(KeyPress);
-	
-	function MouseClick(x, y) {
-		var m = document.getElementById("mouser");
-		m.innerHTML = "X: " + x + ", Y:" + y;
-	}
-	
-	function KeyPress(charCode) {
-		var m = document.getElementById("keyboard");
-		m.innerHTML = "Char: " + charCode;
-	}*/
 </script>
