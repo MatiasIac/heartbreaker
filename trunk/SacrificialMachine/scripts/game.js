@@ -61,7 +61,7 @@ function Game() {
 	var lastKeyPressed = 0;
 	var showBlood = false;
 	var showMouseEnabled = true;
-	var timerValue = 60;
+	var timerValue = 50;
 	var accTimer = 0;
 	var canvas;
 	
@@ -299,11 +299,12 @@ function Game() {
 		heartY -= 0.2;
 		
 		if (knifeOffsetX < -30) {
+			powerAcc *= 0.5;
 			knifeOffsetX = 0;
 			knifeOffsetY = 0;
 		
 			successCounter = 0;
-			timerValue += 2;
+			//timerValue += 2;
 			heartY = 70;
 			showBlood = false;
 			
@@ -325,6 +326,7 @@ function Game() {
 		knifeY += 10;
 				
 		if (knifeOffsetX < -30) {
+			powerAcc -= 20;
 			knifeOffsetX = 0;
 			knifeOffsetY = 0;
 			
