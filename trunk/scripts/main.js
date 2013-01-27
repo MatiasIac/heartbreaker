@@ -32,9 +32,7 @@ function MinFwkGame() {
 	};
 	
 	this.removeAll = function() {
-		for (var i = 0; i < gameObjects.length; i++) {
-			self.remove(gameObjects[i]);
-		}	
+		gameObjects = [];	
 	};
 
 	function processAll() {
@@ -100,6 +98,7 @@ function MinFwkGame() {
 	this.unregisterMouseClick = function () {
 		canvas.removeEventListener("click", mouseClick, false);
 		mouseCallers = [];
+		isMouseRegistered = false;
 	}
 	
 	this.console = new function (){
