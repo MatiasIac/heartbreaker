@@ -1,3 +1,5 @@
+var intervalId = 0;
+
 function MinFwkGame() {
 
 	var canvas;
@@ -20,9 +22,14 @@ function MinFwkGame() {
 		
 		gameObjects = new Array();
 	
-		setInterval(runGame, 1000 / 30);
+		intervalId = setInterval(runGame, 1000 / 30);
 	}
 
+	this.stopGame = function (callback) {
+		clearInterval(intervalId);
+		callback(context);
+	}
+	
 	this.add = function (obj) {
 		objectToBeAdded.push(obj);
 	};

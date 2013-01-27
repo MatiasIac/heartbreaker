@@ -89,5 +89,13 @@ function Portada() {
 		
 		context.drawImage(gameTitle, 0,0);
 		context.drawImage(startButton, 210,400);
+		
+		context.save();
+			context.font = "10pt arial";
+			context.fillStyle = "rgb(255,255,255)";
+			context.fillText("In this neighborhood you can find some cheaters couples.", 10, 10);
+			context.fillText("Wait for each one to visit his home and then, one or many of them could sneak on other home.", 10, 24);
+			context.fillText("Click on the home with the cheater to win.", 10, 38);
+		context.restore();
 	}
 }
