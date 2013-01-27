@@ -6,7 +6,7 @@ function Game() {
 	var powerBar = new Image();
 	var bloodShot = new Image();
 	var knife = new Image();
-	
+	var knifeAngle = 0;
 	var hurt = new Audio();
 	var kill = new Audio();
 	var heartBeat = new Audio();
@@ -41,6 +41,8 @@ function Game() {
 	var heartY = 70;
 	var knifeX = 250;
 	var knifeY = 70;
+	var knifeOffsetX = 0;
+	var knifeOffsetY = 0;
 	var powerAcc = 150;
 	var accumulator = 0;
 	var levelFriction = 2;
@@ -49,6 +51,7 @@ function Game() {
 	var showBlood = false;
 	var timerValue = 60;
 	var accTimer = 0;
+	var canvas;
 	
 	this.init = function() {
 		currentUpdater = normalUpdate;
@@ -59,14 +62,52 @@ function Game() {
 		
 		if (document.addEventListener) {
 			document.addEventListener("keypress", keyPress , false);
-			var canvas = document.getElementById("canvas");
+			canvas = document.getElementById("canvas");
 			canvas.addEventListener("click", onClick , false);
+			canvas.addEventListener("mousemove", updateMouse, false);
+			
 		}
 
 	}
 	
+	function updateMouse(e) {
+		var x;
+		var y;
+		
+		if (e.pageX || e.pageY) { 
+		  x = e.pageX;
+		  y = e.pageY;
+		} else { 
+		  x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft; 
+		  y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop; 
+		} 
+		
+		x -= canvas.offsetLeft;
+		y -= canvas.offsetTop;
+		
+		
+
+		
+		if  (x < 220) {
+			x = 220;
+		}
+		
+		knifeX = x + knifeOffsetX;
+		knifeY = y + knifeOffsetY;
+		knifeAngle =  -90 + (((x -220) * (y - 200)) +  ((x - 200) * (y - 200))) * -0.005;
+		
+		if (knifeAngle >  -20) {
+			knifeAngle = -20;
+		}
+		console.log(knifeAngle);
+		
+
+		
+		
+	
+	}
 	function onClick() {
-		if (powerAcc >= 240) {
+		if (powerAcc >= 240 && knifeAngle < -40) {
 			//Kill
 			kill.play();
 			heartBeat.play();
@@ -134,7 +175,14 @@ function Game() {
 			context.drawImage(heart, heartX, heartY, 50, 65);
 		}
 		
-		context.drawImage(knife, knifeX, knifeY);
+		context.save();
+			context.translate(knifeX, knifeY);
+			context.rotate(_global_DegreeToRadians(knifeAngle));
+			context.translate(-knifeX, -knifeY);
+			context.drawImage(knife, knifeX, knifeY);
+		context.restore();
+		
+		
 		
 		context.drawImage(powerBar, 0, 0, powerAcc, 10,
 			10, 189, powerAcc, 10);
@@ -187,21 +235,25 @@ function Game() {
 	
 		showBlood = true;
 		
-		if (knifeX > 180) {
-			knifeY += 5;
-			knifeX -= 10;
-		}
+		knifeOffsetX -= 5;
+		knifeOffsetY += 10;
+		knifeX -= 5;
+		knifeY += 10;
 		
 		heartY -= 0.2;
 		
-		if (successCounter >= 1.5) {
+			
+		
+		if (knifeOffsetX < -30) {
+			knifeOffsetX = 0;
+			knifeOffsetY = 0;
+		
 			successCounter = 0;
 			selectRandomImage();
 			timerValue += 2;
 			heartY = 70;
 			showBlood = false;
-			knifeX = 250;
-			knifeY = 70;
+
 			
 			points++;
 			levelFriction += 0.5;
@@ -212,12 +264,16 @@ function Game() {
 	}
 	
 	function failKill(delta) {
-		knifeY += 5;
-		knifeX -= 10;
+		knifeOffsetX -= 5;
+		knifeOffsetY += 10;
+		knifeX -= 5;
+		knifeY += 10;
 		
-		if (knifeX < 180) {
-			knifeX = 250;
-			knifeY = 70;
+		
+		if (knifeOffsetX < -30) {
+			knifeOffsetX = 0;
+			knifeOffsetY = 0;
+			
 			
 			timerValue -= 2;
 			points--;
