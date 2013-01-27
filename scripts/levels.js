@@ -16,9 +16,9 @@ function createDepto(x, y) {
 
 			context.drawImage(busySprite, depto.coords.x + buildingX, 
 				g_baseline - depto.coords.y);
-			for (var i = 0; i < self.ocupantes.length; i++) {
-				self.ocupantes[i].draw(context, i);
-			}
+				for (var i = 0; i < self.ocupantes.length; i++) {
+					self.ocupantes[i].drawInFlat(context);
+				}
 		};
 		
 		this.drawEmptyFlat = function(context, depto, buildingX) {
@@ -46,9 +46,9 @@ function createDepto(x, y) {
 
 
 var prefabBuildings = 
-	[{data: [[createDepto(50,140),createDepto(140,140)],
-			  [createDepto(50,220),createDepto(150,220)],
-			  [createDepto(30,300),createDepto(140,300)]],
+	[{data: [[createDepto(60,150),createDepto(165,150)],
+			  [createDepto(60,235),createDepto(170,235)],
+			  [createDepto(55,315),createDepto(180,320)]],
 	   door: {coords: {x:150, y: 0}}},
 	  {data: [[createDepto(50,140),createDepto(140,140)],
 			  [createDepto(50,220),createDepto(150,220)],
@@ -57,7 +57,11 @@ var prefabBuildings =
 	  {data: [[createDepto(50,140),createDepto(140,140)],
 			  [createDepto(50,220),createDepto(150,220)],
 			  [createDepto(30,300),createDepto(140,300)]],
-	   door: {coords: {x: 100, y: 0}}}
+	   door: {coords: {x: 100, y: 0}}},
+	   {data: [[createDepto(60,150),createDepto(165,150)],
+			  [createDepto(60,235),createDepto(170,235)],
+			  [createDepto(55,315),createDepto(180,320)]],
+	   door: {coords: {x:150, y: 0}}}
    ];
 
 var prefabPeople = 
@@ -106,15 +110,15 @@ var prefabPeople =
 var levels = [
 	{
 		buildings:
-			[createBuilding(40, 0), createBuilding(430, 2)],
+			[createBuilding(40, 0), createBuilding(430,3)],
 		
 		wasos:
 			//createWaso(startX, walkSpeed, layer, direction, index) 
 			//los pares son guasos
-			[createWaso(200, 50.3, 13, 1, 0), createWaso(300, 54.3, 13, -1, 1),
-			createWaso(100, 70.3, 13, 1, 2), createWaso(35, 83.3, 13, -1, 3),
-			createWaso(20, 60.3, 13, 1, 4), createWaso(350, 65.3, 13, -1, 5),
-			createWaso(230, 80.3, 13, 1, 7)], 
+			[createWaso(200, 50.3, -5, 1, 0), createWaso(300, 54.3, -3, -1, 1),
+			createWaso(100, 70.3, 2, 1, 7), createWaso(35, 83.3, 8, -1, 3),
+			createWaso(20, 60.3, 10, 1, 4), createWaso(350, 65.3, 16, -1, 5),
+			createWaso(230, 80.3, 20, 1, 6)], 
 		hornerators: 1
 	}
 ];
