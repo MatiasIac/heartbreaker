@@ -39,8 +39,16 @@ function Game() {
 	var sacY = 80;
 	var heartX = 250;
 	var heartY = 70;
+	
+	var x;
+	var y;
+	
 	var knifeX = 250;
 	var knifeY = 70;
+	
+	var shakeX = 0;
+	var shakeY = 0;
+	
 	var knifeOffsetX = 0;
 	var knifeOffsetY = 0;
 	var powerAcc = 150;
@@ -72,8 +80,6 @@ function Game() {
 	}
 	
 	function updateMouse(e) {
-		var x;
-		var y;
 		
 		if (e.pageX || e.pageY) { 
 		  x = e.pageX;
@@ -86,20 +92,7 @@ function Game() {
 		x -= canvas.offsetLeft;
 		y -= canvas.offsetTop;
 		
-		
 
-		
-
-		
-		knifeX = x + knifeOffsetX;
-		knifeY = y + knifeOffsetY;
-		knifeAngle =  -120 + (((x -220) * (x - 220)) +  ((y - 80) * (y - 80))) * +0.01;
-		
-		if (knifeAngle >  0) {
-			knifeAngle = -0;
-		} else if (knifeAngle < - 120) {
-			//knifeAngle = -120;
-		}
 		console.log(knifeAngle);
 		
 
@@ -109,7 +102,7 @@ function Game() {
 	}
 	function onClick() {
 		if (showMouseEnabled) {
-			if (powerAcc >= 240 && knifeAngle < -50) {
+			if (powerAcc >= 240 && knifeAngle < -100) {
 				//Kill
 				kill.play();
 				heartBeat.play();
@@ -156,6 +149,28 @@ function Game() {
 			}
 		}
 		currentUpdater(delta);
+		
+		var currentTime = new Date().getTime() / 500;
+		var annoyngMeter = points;
+		var annoyingQuotient = annoyngMeter / 100;
+		var annoyngSin = Math.sin(currentTime * annoyingQuotient * 10 * 1 + Math.random() * annoyingQuotient * 1);
+		var annoyngCos = Math.cos(currentTime * annoyingQuotient * 10 * 0.8 + Math.random() * annoyingQuotient * 1);
+		
+		shakeX = annoyngCos * 600 * annoyingQuotient;
+		shakeY = annoyngSin * 600 * annoyingQuotient;
+		
+		knifeX = x + knifeOffsetX + shakeX;
+		knifeY = y + knifeOffsetY + shakeY;
+		
+		var angleX = x + shakeX;
+		var angleY = y + shakeY;
+		
+		knifeAngle =  -120 + (((angleX -220) * (angleX - 220)) +  ((angleY - 80) * (angleY - 80))) * + 0.01;
+		
+		if (knifeAngle >  0) {
+			knifeAngle = -0;
+		} 
+		
 	}
 	
 	this.draw = function(context) {
@@ -256,7 +271,7 @@ function Game() {
 			showBlood = false;
 			
 			points++;
-			levelFriction += 0.5;
+			levelFriction += 0.5  * 3 / (3 + points);
 			
 			currentUpdater = bringNewBody;
 			doBloodBath = bloodBath;
