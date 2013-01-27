@@ -37,8 +37,6 @@ function Game() {
 	
 	var clock = new Image();
 	clock.src = "graphics/reloj.png";
-	var templo = new Image();
-	templo.src = "graphics/templo.png";
 	
 	var sacX = 200;
 	var sacY = 80;
@@ -226,8 +224,44 @@ function Game() {
 		if (powerAcc > 300) { powerAcc = 270; }
 	}
 	
+	var bringStatus = 0;
+	var staticAcce = 10;
+	var counterBring = 0;
+	var gravedad = 2;
+	var acceIni = staticAcce;
+	
 	function bringNewBody(delta) {
-		sacX -= 15.2;
+		counterBring += delta;
+		if (counterBring >= 0.05) {
+			counterBring = 0;
+			switch (bringStatus) {
+				case 0:
+					sacY -= acceIni;
+					acceIni -= gravedad;
+					sacX -= 10;
+					
+					if (sacX < -100) {
+						selectRandomImage();
+						bringStatus++;
+						sacX = 10;
+						sacY = 300;
+					}
+					break;
+				case 1:
+					sacX += 10;
+					sacY -= 10;
+					if (sacX > 195 && sacX < 210) {
+						sacX = 200;
+						sacY = 80;
+						showMouseEnabled = true;
+						currentUpdater = normalUpdate;
+						bringStatus = 0;
+					}
+					break;
+			}
+		}
+		
+		/*sacX -= 15.2;
 		
 		if (sacX < -40) {
 			selectRandomImage();
@@ -238,7 +272,7 @@ function Game() {
 			sacX = 200;
 			showMouseEnabled = true;
 			currentUpdater = normalUpdate;
-		}
+		}*/
 	}
 	
 	var successCounter = 0;
@@ -277,6 +311,7 @@ function Game() {
 			levelFriction += 0.5  * 3 / (3 + points);
 			
 			currentUpdater = bringNewBody;
+			acceIni = staticAcce;
 			doBloodBath = bloodBath;
 		}
 	}
@@ -318,7 +353,9 @@ function Game() {
 
 function Background() {
 	var escena = new Image();
+	var templo = new Image();
 	escena.src = "graphics/escena.png";
+	templo.src = "graphics/templo.png";
 
 	this.visible = true;
 	
@@ -328,6 +365,7 @@ function Background() {
 	
 	this.draw = function (context) {
 		context.drawImage(escena, 0,0, 640, 200);
+		context.drawImage(templo, -10, 120, 390, 190);
 	}
 	
 	this.zOrder = 1;
@@ -356,7 +394,7 @@ function BloodSplash() {
 	
 	this.init = function() {
 		x = (Math.random() * 150) + 130;
-		y = (Math.random() * 60) + 50;
+		y = (Math.random() * 20) + 100;
 	}
 	
 	this.update = function (delta) {
