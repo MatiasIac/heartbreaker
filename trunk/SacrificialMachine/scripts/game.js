@@ -15,7 +15,7 @@ function Game() {
 	heartBeat.src = "fx/heartBeat.wav";
 	
 	function loadSacrified() {
-		for (var i = 0; i < 14; i++) {
+		for (var i = 0; i < 24; i++) {
 			var s = new Image();
 			s.src = "graphics/sacrificied" + i + ".png";
 			pictureBag.push(s);
@@ -34,6 +34,11 @@ function Game() {
 	powerBar.src = "graphics/bar.png";
 	bloodShot.src = "graphics/bloodShot.png";
 	knife.src = "graphics/knife.png";
+	
+	var clock = new Image();
+	clock.src = "graphics/reloj.png";
+	var templo = new Image();
+	templo.src = "graphics/templo.png";
 	
 	var sacX = 200;
 	var sacY = 80;
@@ -74,13 +79,10 @@ function Game() {
 			canvas = document.getElementById("canvas");
 			canvas.addEventListener("click", onClick , false);
 			canvas.addEventListener("mousemove", updateMouse, false);
-			
 		}
-
 	}
 	
 	function updateMouse(e) {
-		
 		if (e.pageX || e.pageY) { 
 		  x = e.pageX;
 		  y = e.pageY;
@@ -91,15 +93,8 @@ function Game() {
 		
 		x -= canvas.offsetLeft;
 		y -= canvas.offsetTop;
-		
-
-		console.log(knifeAngle);
-		
-
-		
-		
-	
 	}
+	
 	function onClick() {
 		if (showMouseEnabled) {
 			if (powerAcc >= 240 && knifeAngle < -100) {
@@ -197,22 +192,28 @@ function Game() {
 		
 		context.fillText(points, (points * 12) + 8, 25);
 		
-		drawInstructions(context);
 		drawTimer(context);
+		drawInstructions(context);
 	}
 	
 	function drawTimer(context) {
+		context.drawImage(clock, 420, 2, 200, 200);
+	
 		context.save();
 			context.fillStyle = "rgb(255,0,0)";
 			context.font = "38pt arial";
-			context.fillText(timerValue, 410, 75);
+			context.fillText(timerValue, 490, 120);
 		context.restore();
 	}
 	
 	function drawInstructions(context) {
 		context.save();
 			context.fillStyle = "rgb(0,0,0)";
+			context.strokeStyle = "rgb(255,255,255)";
 			context.font = "11pt arial";
+			context.strokeText("Use A and D to energy the knife", 410, 160);
+			context.strokeText("Click to stab", 410, 175);
+			context.strokeText("Collect hearts before the time's up!", 410, 190);
 			context.fillText("Use A and D to energy the knife", 410, 160);
 			context.fillText("Click to stab", 410, 175);
 			context.fillText("Collect hearts before the time's up!", 410, 190);
@@ -315,6 +316,23 @@ function Game() {
 	this.visible = true;
 }
 
+function Background() {
+	var escena = new Image();
+	escena.src = "graphics/escena.png";
+
+	this.visible = true;
+	
+	this.init = function() {}
+	
+	this.update = function (delta) {}
+	
+	this.draw = function (context) {
+		context.drawImage(escena, 0,0, 640, 200);
+	}
+	
+	this.zOrder = 1;
+}
+
 function BloodSplash() {
 	var splash = new Image();
 	
@@ -348,5 +366,5 @@ function BloodSplash() {
 		context.drawImage(splash, x, y);
 	}
 	
-	this.zOrder = 1;
+	this.zOrder = 2;
 }
