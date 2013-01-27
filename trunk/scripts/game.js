@@ -75,9 +75,22 @@ function Game() {
 		}
 		
 		var horneators = []; 
-		//A esta altura, alldeptos tiene todos los departamentos.
-		var deptosAsignables = (wasosAsignables.length - lanas) / 2;
+		
+		for (var posibleHorneatorIndex in wasosAsignables) {
+				posibleHorneator = wasosAsignables[posibleHorneatorIndex]
+				if (posibleHorneator.isHornerator) {
+					horneators.push(posibleHorneator);
+					posibleHorneator.side = 2;
+					wasosAsignables.splice(posibleHorneatorIndex, 1);
+				}
+		}
+		//A esta altura, alldeptos tiene todos los departamentos.	
+		var deptosAsignables = (wasosAsignables.length) / 2;
 		var chosenDeptos = [];
+		
+		
+		
+		
 		for (var i = 0; i < deptosAsignables; i++) {
 			var chosenNumber = Math.floor(Math.random() * allDeptos.length);
 			var chosen = allDeptos.splice(chosenNumber, 1)[0];
@@ -86,15 +99,12 @@ function Game() {
 			while (personasAsignadas < 2) {
 				var chosenPersonNumber = Math.floor(Math.random() * wasosAsignables.length);
 				personaAsignada = wasosAsignables.splice(chosenPersonNumber, 1)[0];
-				if (personaAsignada.isHornerator) {
-					horneators.push(personaAsignada);
-					personaAsignada.side = 2;
-				} else {
-					personasAsignadas++;
-					personaAsignada.side = personasAsignadas;
-					chosen.owners.push(personaAsignada);
-					personaAsignada.depto = chosen;
-				}
+				
+				personasAsignadas++;
+				personaAsignada.side = personasAsignadas;
+				chosen.owners.push(personaAsignada);
+				personaAsignada.depto = chosen;
+			
 			}
 		}
 		usedDeptos = chosenDeptos.slice(0);

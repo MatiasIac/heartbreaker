@@ -51,8 +51,14 @@ function Waso(characteristics) {
 			context.drawImage(sprite, frame * 35, 0, 35, 62,
 				x, g_baseline - sprite.height, 35, 62);
 			context.save();
-				context.fillStyle = "rgb(0,0,0)";
-				context.fillText("id: " + chars.id + " " + self.isHornerator, x + (35 / 2),
+				if (self.isHornerator) {
+					context.fillStyle = "rgb(0,255,0)";
+				} else if (self.pataeLana) {
+					context.fillStyle = "rgb(255,0,0)";
+				} else {
+					context.fillStyle = "rgb(0,0,255)";
+				}
+				context.fillText("id: " + chars.id, x + (35 / 2),
 					g_baseline - (sprite.height + 5));
 			context.restore();
 		}
@@ -79,7 +85,7 @@ function Waso(characteristics) {
 			self.state = 1;
 			self.inside = true;
 			self.insideTime = new Date().getTime();
-			self.insideTimeOut = self.insideTime + Math.floor(3000 + Math.random() * 10000);  
+			self.insideTimeOut = self.insideTime + Math.floor(3000 + Math.random() * 5000);  
 			currentAction = inHouse;
 			//currentAction = idleInHouse;
 		}		
