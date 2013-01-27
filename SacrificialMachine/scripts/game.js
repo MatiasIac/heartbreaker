@@ -225,14 +225,14 @@ function Game() {
 	}
 	
 	var bringStatus = 0;
-	var staticAcce = 10;
+	var staticAcce = 20;
 	var counterBring = 0;
-	var gravedad = 2;
+	var gravedad = 6;
 	var acceIni = staticAcce;
 	
 	function bringNewBody(delta) {
 		counterBring += delta;
-		if (counterBring >= 0.05) {
+		if (counterBring >= 0.005) {
 			counterBring = 0;
 			switch (bringStatus) {
 				case 0:
@@ -249,7 +249,7 @@ function Game() {
 					break;
 				case 1:
 					sacX += 10;
-					sacY -= 10;
+					sacY -= 12;
 					if (sacX > 195 && sacX < 210) {
 						sacX = 200;
 						sacY = 80;
