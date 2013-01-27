@@ -88,16 +88,16 @@ function Game() {
 		
 
 		
-		if  (x < 220) {
-			x = 220;
-		}
+
 		
 		knifeX = x + knifeOffsetX;
 		knifeY = y + knifeOffsetY;
-		knifeAngle =  -90 + (((x -220) * (y - 200)) +  ((x - 200) * (y - 200))) * -0.005;
+		knifeAngle =  -120 + (((x -220) * (x - 220)) +  ((y - 80) * (y - 80))) * +0.01;
 		
-		if (knifeAngle >  -20) {
-			knifeAngle = -20;
+		if (knifeAngle >  0) {
+			knifeAngle = -0;
+		} else if (knifeAngle < - 120) {
+			//knifeAngle = -120;
 		}
 		console.log(knifeAngle);
 		
@@ -107,7 +107,7 @@ function Game() {
 	
 	}
 	function onClick() {
-		if (powerAcc >= 240 && knifeAngle < -40) {
+		if (powerAcc >= 240 && knifeAngle < -50) {
 			//Kill
 			kill.play();
 			heartBeat.play();
