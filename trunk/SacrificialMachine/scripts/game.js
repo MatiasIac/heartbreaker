@@ -49,6 +49,7 @@ function Game() {
 	var points = 0;
 	var lastKeyPressed = 0;
 	var showBlood = false;
+	var showMouseEnabled = true;
 	var timerValue = 60;
 	var accTimer = 0;
 	var canvas;
@@ -107,15 +108,17 @@ function Game() {
 	
 	}
 	function onClick() {
-		if (powerAcc >= 240 && knifeAngle < -50) {
-			//Kill
-			kill.play();
-			heartBeat.play();
-			currentUpdater = successKill;
-		} else {
-			//Fail
-			hurt.play();
-			currentUpdater = failKill;
+		if (showMouseEnabled) {
+			if (powerAcc >= 240 && knifeAngle < -50) {
+				//Kill
+				kill.play();
+				heartBeat.play();
+				currentUpdater = successKill;
+			} else {
+				//Fail
+				hurt.play();
+				currentUpdater = failKill;
+			}
 		}
 	}
 	
@@ -135,18 +138,6 @@ function Game() {
 					powerAcc += 15;
 				} else { powerAcc -= 5;	}
 				break;
-			/*case 32:
-				if (powerAcc >= 240) {
-					//Kill
-					kill.play();
-					heartBeat.play();
-					currentUpdater = successKill;
-				} else {
-					//Fail
-					hurt.play();
-					currentUpdater = failKill;
-				}
-				break;*/
 		}
 		
 		if (powerAcc < 0) { powerAcc = 0; }
@@ -181,8 +172,6 @@ function Game() {
 			context.translate(-knifeX, -knifeY);
 			context.drawImage(knife, knifeX, knifeY);
 		context.restore();
-		
-		
 		
 		context.drawImage(powerBar, 0, 0, powerAcc, 10,
 			10, 189, powerAcc, 10);
@@ -219,6 +208,21 @@ function Game() {
 		if (powerAcc > 300) { powerAcc = 270; }
 	}
 	
+	function bringNewBody(delta) {
+		sacX -= 15.2;
+		
+		if (sacX < -40) {
+			selectRandomImage();
+			sacX = 680;
+		}
+		
+		if (sacX > 205 && sacX < 220) {
+			sacX = 200;
+			showMouseEnabled = true;
+			currentUpdater = normalUpdate;
+		}
+	}
+	
 	var successCounter = 0;
 	
 	var doBloodBath = bloodBath;
@@ -228,6 +232,7 @@ function Game() {
 	};
 	
 	function successKill(delta) {
+		showMouseEnabled = false;
 		successCounter += delta;
 	
 		doBloodBath();
@@ -239,41 +244,36 @@ function Game() {
 		knifeOffsetY += 10;
 		knifeX -= 5;
 		knifeY += 10;
-		
 		heartY -= 0.2;
-		
-			
 		
 		if (knifeOffsetX < -30) {
 			knifeOffsetX = 0;
 			knifeOffsetY = 0;
 		
 			successCounter = 0;
-			selectRandomImage();
 			timerValue += 2;
 			heartY = 70;
 			showBlood = false;
-
 			
 			points++;
 			levelFriction += 0.5;
 			
-			currentUpdater = normalUpdate;
+			currentUpdater = bringNewBody;
 			doBloodBath = bloodBath;
 		}
 	}
 	
 	function failKill(delta) {
+		showMouseEnabled = false;
+		
 		knifeOffsetX -= 5;
 		knifeOffsetY += 10;
 		knifeX -= 5;
 		knifeY += 10;
-		
-		
+				
 		if (knifeOffsetX < -30) {
 			knifeOffsetX = 0;
 			knifeOffsetY = 0;
-			
 			
 			timerValue -= 2;
 			points--;
@@ -282,6 +282,7 @@ function Game() {
 			if (levelFriction < 0) { levelFriction = 0; }
 			if (points < 0) { points = 0; }
 			
+			showMouseEnabled = true;
 			currentUpdater = normalUpdate;
 		}
 	}
