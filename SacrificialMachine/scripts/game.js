@@ -195,6 +195,8 @@ function Game() {
 			context.drawImage(heart, (12 * i) + 10, 10, 25, 25);
 		}
 		
+		context.fillText(points, (points * 12) + 8, 25);
+		
 		drawInstructions(context);
 		drawTimer(context);
 	}
