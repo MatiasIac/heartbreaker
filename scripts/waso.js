@@ -55,7 +55,7 @@ function Waso(characteristics) {
 
 		context.drawImage(sprite, frame * 35, 0, 35, 62,
 			x, g_baseline - sprite.height + characteristics.layer, 35, 62);
-		context.save();
+		/*context.save();
 			if (self.isHornerator) {
 				context.fillStyle = "rgb(0,255,0)";
 			} else if (self.pataeLana) {
@@ -66,7 +66,7 @@ function Waso(characteristics) {
 			context.fillText("id: " + chars.id, x + (35 / 2),
 				g_baseline - (sprite.height + 5));
 		context.restore();
-
+		*/
 	}
 	
 	var currentAction = function(delta) {};

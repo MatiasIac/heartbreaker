@@ -67,17 +67,32 @@ function Building(xParam) {
 				
 				if (rectClick.intersects(rectWindow)) {
 					var ocupantes = estructura[piso][depto]["ocupantes"];
-					var isRapperThere = false;
+					var isRipperThere = false;
 					if (ocupantes.length === 2) {
 						for (var i = 0; i < ocupantes.length; i++) {
 							if (ocupantes[i].pataeLana !== undefined) {
-								isRapperThere = true;
-								break;
+								isRipperThere = true;
+								game.stopGame(function (context) {
+									context.save();
+										context.fillStyle = "rgb(0,255,10)";
+										context.font = "30pt arial";
+										context.fillText("You found the cheater!", 130, 100);
+									context.restore();
+								});
 							}
 						}
+						
+						if (!isRipperThere) {
+							game.stopGame(function (context) {
+								context.fillStyle = "rgb(255,0,10)";
+								context.font = "30pt arial";
+								context.fillText("How you dare? Blaming an innocent!", 130, 100);
+							});
+						}
 					}
-					game.console.append("Piso: " + piso + ", Dpto: " + depto);
-					game.console.append("Ocupantes: " + ocupantes.length + ", esta en trampa: " + isRapperThere);
+					
+					/*game.console.append("Piso: " + piso + ", Dpto: " + depto);
+					game.console.append("Ocupantes: " + ocupantes.length + ", esta en trampa: " + isRipperThere);*/
 					break;
 				}
 			}
